@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/Navigation.astro";
+import { CATEGORIES, CATEGORY_META, getEntriesByCategory } from "../lib/collections";
+import { websiteJsonLd } from "../lib/structured-data";
+
+const jsonLd = websiteJsonLd({
+  url: Astro.site?.toString() || "",
+  name: "DevOps Wiki",
+});
+
+const categoriesWithCount = await Promise.all(
+  CATEGORIES.map(async (category) => {
+    const entries = await getEntriesByCategory(category);
+    return { category, ...CATEGORY_META[category], count: entries.length };
+  })
+);
+---
+
+<BaseLayout
+  title="Home"
+  description="A knowledge base for DevOps and Platform engineers. Tutorials, how-to guides, explanations, and references."
+  jsonLd={jsonLd}
+>
+  <Navigation />
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="mb-16">
+      <h1 class="font-[family-name:var(--font-heading)] text-4xl sm:text-5xl font-bold text-zinc-100 mb-4">
+        DevOps Wiki
+      </h1>
+      <p class="text-lg text-zinc-300 max-w-2xl">
+        A knowledge base for DevOps and Platform engineers. Find tutorials, practical guides, deep explanations, and quick reference material.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      {
+        categoriesWithCount.map(({ category, label, description, count }) => (
+          <a
+            href={`/${category}/`}
+            class="group block p-6 bg-zinc-800 border border-zinc-700 no-underline transition-colors hover:border-orange-500"
+          >
+            <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-zinc-100 mb-2 group-hover:text-orange-500 transition-colors">
+              {label}
+            </h2>
+            <p class="text-sm text-zinc-400 mb-3">{description}</p>
+            <span class="text-xs text-zinc-500">{count} {count === 1 ? "article" : "articles"}</span>
+          </a>
+        ))
+      }
+    </div>
+  </main>
+</BaseLayout>

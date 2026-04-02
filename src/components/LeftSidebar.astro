@@ -1,0 +1,41 @@
+---
+import { getEntriesByCategory, CATEGORY_META, type Category } from "../lib/collections";
+
+interface Props {
+  category: Category;
+  currentSlug: string;
+}
+
+const { category, currentSlug } = Astro.props;
+const entries = await getEntriesByCategory(category);
+---
+
+<aside class="hidden lg:block w-[250px] shrink-0">
+  <div class="sticky top-[3.75rem] h-[calc(100vh-3.75rem)] overflow-y-auto py-6 pr-4">
+    <h2 class="font-[family-name:var(--font-heading)] font-semibold text-sm text-zinc-400 uppercase tracking-wider mb-3">
+      {CATEGORY_META[category].label}
+    </h2>
+    <ul class="space-y-1">
+      {
+        entries.map((entry) => {
+          const isActive = entry.id === currentSlug;
+          return (
+            <li>
+              <a
+                href={`/${category}/${entry.id}/`}
+                class:list={[
+                  "block px-3 py-1.5 text-sm no-underline transition-colors",
+                  isActive
+                    ? "text-orange-500 bg-zinc-800 border-l-2 border-orange-500"
+                    : "text-zinc-300 hover:text-zinc-100 hover:bg-zinc-800 border-l-2 border-transparent",
+                ]}
+              >
+                {entry.data.title}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</aside>

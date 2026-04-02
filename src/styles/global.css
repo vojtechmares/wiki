@@ -1,0 +1,58 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme inline {
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+  --radius: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+}
+
+/* Prose overrides for dark theme */
+.prose {
+  --tw-prose-body: var(--color-zinc-300);
+  --tw-prose-headings: var(--color-zinc-100);
+  --tw-prose-links: var(--color-zinc-400);
+  --tw-prose-bold: var(--color-zinc-100);
+  --tw-prose-counters: var(--color-zinc-400);
+  --tw-prose-bullets: var(--color-zinc-500);
+  --tw-prose-hr: var(--color-zinc-700);
+  --tw-prose-quotes: var(--color-zinc-300);
+  --tw-prose-quote-borders: var(--color-orange-500);
+  --tw-prose-code: var(--color-zinc-100);
+  --tw-prose-pre-code: var(--color-zinc-300);
+  --tw-prose-pre-bg: var(--color-zinc-800);
+  --tw-prose-th-borders: var(--color-zinc-600);
+  --tw-prose-td-borders: var(--color-zinc-700);
+}
+
+.prose :where(h1, h2, h3):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  font-family: var(--font-heading);
+}
+
+.prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)):hover {
+  color: var(--color-zinc-200);
+}
+
+.prose :where(code):not(:where(pre *, [class~="not-prose"], [class~="not-prose"] *)) {
+  font-family: var(--font-mono);
+  background: var(--color-zinc-800);
+  padding: 0.125rem 0.375rem;
+  font-size: 0.875em;
+}
+
+.prose :where(pre):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  font-family: var(--font-mono);
+  background: var(--color-zinc-800);
+  border: 1px solid var(--color-zinc-700);
+  border-radius: 0;
+}
