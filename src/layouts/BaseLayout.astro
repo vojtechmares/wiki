@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import Footer from "../components/Footer.astro";
 
 interface Props {
   title: string;
@@ -40,7 +41,8 @@ const fullTitle = `${title} | ${siteName}`;
     <!-- Structured data -->
     {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
   </head>
-  <body class="bg-zinc-900 text-zinc-100 font-sans antialiased min-h-screen">
+  <body class="bg-zinc-900 text-zinc-100 font-sans antialiased min-h-screen flex flex-col">
     <slot />
+    <Footer />
   </body>
 </html>
