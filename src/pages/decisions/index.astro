@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navigation from "../../components/Navigation.astro";
 import GridLayout from "../../components/GridLayout.astro";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../../components/ui/card";
+import { PageBreadcrumb } from "../../components/PageBreadcrumb";
 import { getDecisions } from "../../lib/collections";
 import { Badge } from "../../components/ui/badge";
 
@@ -26,7 +27,11 @@ const statusColors: Record<string, string> = {
   <GridLayout class="py-12">
     <main class="lg:col-start-4 lg:col-span-6">
     <div class="mb-10">
-      <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-2">
+      <PageBreadcrumb items={[
+        { label: "Home", href: "/" },
+        { label: "Decisions" },
+      ]} />
+      <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-2 mt-3">
         Decisions
       </h1>
       <p class="text-zinc-400">

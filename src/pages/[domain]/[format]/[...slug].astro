@@ -3,8 +3,9 @@ import { render } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Navigation from "../../../components/Navigation.astro";
 import ContentLayout from "../../../components/ContentLayout.astro";
-import { getAllEntries, type Domain, type Format } from "../../../lib/collections";
+import { getAllEntries, DOMAIN_META, FORMAT_META, type Domain, type Format } from "../../../lib/collections";
 import { articleJsonLd } from "../../../lib/structured-data";
+import { PageBreadcrumb } from "../../../components/PageBreadcrumb";
 import { Badge } from "../../../components/ui/badge";
 
 export async function getStaticPaths() {
@@ -47,7 +48,13 @@ const jsonLd = articleJsonLd({
     headings={headings}
   >
     <header class="not-prose mb-8">
-      <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-3">
+      <PageBreadcrumb items={[
+        { label: "Home", href: "/" },
+        { label: DOMAIN_META[entry.domain as Domain].label, href: `/${entry.domain}` },
+        { label: FORMAT_META[entry.format as Format].label, href: `/${entry.domain}/${entry.format}` },
+        { label: entry.data.title },
+      ]} />
+      <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-3 mt-3">
         {entry.data.title}
       </h1>
       <p class="text-zinc-400 mb-4">{entry.data.description}</p>

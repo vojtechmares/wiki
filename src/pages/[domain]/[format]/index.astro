@@ -4,6 +4,7 @@ import Navigation from "../../../components/Navigation.astro";
 import GridLayout from "../../../components/GridLayout.astro";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
+import { PageBreadcrumb } from "../../../components/PageBreadcrumb";
 import {
   DOMAINS,
   DOMAIN_META,
@@ -35,12 +36,12 @@ const entries = await getEntriesByDomainAndFormat(domain, format);
   <GridLayout class="py-12">
     <main class="lg:col-start-4 lg:col-span-6">
     <div class="mb-10">
-      <p class="text-sm text-zinc-500 mb-1">
-        <a href={`/${domain}`} class="hover:text-orange-500 no-underline transition-colors">
-          {domainMeta.label}
-        </a>
-      </p>
-      <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-2">
+      <PageBreadcrumb items={[
+        { label: "Home", href: "/" },
+        { label: domainMeta.label, href: `/${domain}` },
+        { label: formatMeta.label },
+      ]} />
+      <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-2 mt-3">
         {formatMeta.label}
       </h1>
       <p class="text-zinc-400">{formatMeta.description}</p>
