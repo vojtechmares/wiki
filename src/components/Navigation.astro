@@ -1,5 +1,6 @@
 ---
 import { DOMAINS, DOMAIN_META } from "../lib/collections";
+import { NavLink } from "./NavLink";
 import Search from "./Search";
 
 const pathname = Astro.url.pathname;
@@ -20,43 +21,19 @@ const pathname = Astro.url.pathname;
           DOMAINS.map((domain) => {
             const isActive = pathname.startsWith(`/${domain}`);
             return (
-              <a
-                href={`/${domain}/`}
-                class:list={[
-                  "px-3 py-1.5 text-sm no-underline transition-colors",
-                  isActive
-                    ? "text-orange-500 bg-zinc-800"
-                    : "text-zinc-300 hover:text-zinc-100 hover:bg-zinc-800",
-                ]}
-              >
+              <NavLink href={`/${domain}/`} isActive={isActive}>
                 {DOMAIN_META[domain].label}
-              </a>
+              </NavLink>
             );
           })
         }
         <span class="w-px h-4 bg-zinc-700 mx-1"></span>
-        <a
-          href="/incidents/"
-          class:list={[
-            "px-3 py-1.5 text-sm no-underline transition-colors",
-            pathname.startsWith("/incidents")
-              ? "text-orange-500 bg-zinc-800"
-              : "text-zinc-300 hover:text-zinc-100 hover:bg-zinc-800",
-          ]}
-        >
+        <NavLink href="/incidents/" isActive={pathname.startsWith("/incidents")}>
           Incidents
-        </a>
-        <a
-          href="/decisions/"
-          class:list={[
-            "px-3 py-1.5 text-sm no-underline transition-colors",
-            pathname.startsWith("/decisions")
-              ? "text-orange-500 bg-zinc-800"
-              : "text-zinc-300 hover:text-zinc-100 hover:bg-zinc-800",
-          ]}
-        >
+        </NavLink>
+        <NavLink href="/decisions/" isActive={pathname.startsWith("/decisions")}>
           Decisions
-        </a>
+        </NavLink>
         <span class="w-px h-4 bg-zinc-700 mx-1"></span>
         <Search client:idle />
       </div>
@@ -82,43 +59,31 @@ const pathname = Astro.url.pathname;
         DOMAINS.map((domain) => {
           const isActive = pathname.startsWith(`/${domain}`);
           return (
-            <a
+            <NavLink
               href={`/${domain}/`}
-              class:list={[
-                "block px-3 py-2 text-sm no-underline",
-                isActive
-                  ? "text-orange-500 bg-zinc-800"
-                  : "text-zinc-300 hover:text-zinc-100",
-              ]}
+              isActive={isActive}
+              className="block w-full justify-start"
             >
               {DOMAIN_META[domain].label}
-            </a>
+            </NavLink>
           );
         })
       }
       <div class="border-t border-zinc-800 mt-1 pt-1">
-        <a
+        <NavLink
           href="/incidents/"
-          class:list={[
-            "block px-3 py-2 text-sm no-underline",
-            pathname.startsWith("/incidents")
-              ? "text-orange-500 bg-zinc-800"
-              : "text-zinc-300 hover:text-zinc-100",
-          ]}
+          isActive={pathname.startsWith("/incidents")}
+          className="block w-full justify-start"
         >
           Incidents
-        </a>
-        <a
+        </NavLink>
+        <NavLink
           href="/decisions/"
-          class:list={[
-            "block px-3 py-2 text-sm no-underline",
-            pathname.startsWith("/decisions")
-              ? "text-orange-500 bg-zinc-800"
-              : "text-zinc-300 hover:text-zinc-100",
-          ]}
+          isActive={pathname.startsWith("/decisions")}
+          className="block w-full justify-start"
         >
           Decisions
-        </a>
+        </NavLink>
       </div>
     </div>
   </div>
