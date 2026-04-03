@@ -1,5 +1,6 @@
 ---
-import type { Domain, Format } from "../lib/collections";
+import type {Domain, Format} from "../lib/collections";
+import GridLayout from "./GridLayout.astro";
 import LeftSidebar from "./LeftSidebar.astro";
 import TableOfContents from "./TableOfContents.tsx";
 
@@ -16,19 +17,21 @@ interface Props {
   headings: Heading[];
 }
 
-const { domain, format, currentSlug, headings } = Astro.props;
+const {domain, format, currentSlug, headings} = Astro.props;
 ---
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-  <div class="flex min-h-[calc(100vh-3.5rem)]">
-    <LeftSidebar domain={domain} currentFormat={format} currentSlug={currentSlug} />
+<GridLayout class="min-h-[calc(100vh-3.5rem)]">
+  <LeftSidebar
+    domain={domain}
+    currentFormat={format}
+    currentSlug={currentSlug}
+  />
 
-    <main class="flex-1 min-w-0 py-8 lg:px-8">
-      <article class="prose prose-lg max-w-none">
-        <slot />
-      </article>
-    </main>
+  <main class="min-w-0 py-8 lg:col-span-6">
+    <article class="prose prose-lg max-w-none">
+      <slot />
+    </article>
+  </main>
 
-    <TableOfContents headings={headings} client:idle />
-  </div>
-</div>
+  <TableOfContents headings={headings} client:idle />
+</GridLayout>

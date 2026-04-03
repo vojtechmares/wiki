@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 
 interface Heading {
   depth: number;
@@ -10,7 +10,7 @@ interface Props {
   headings: Heading[];
 }
 
-export default function TableOfContents({ headings }: Props) {
+export default function TableOfContents({headings}: Props) {
   const [activeId, setActiveId] = useState<string>("");
 
   const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
@@ -24,7 +24,7 @@ export default function TableOfContents({ headings }: Props) {
           }
         }
       },
-      { rootMargin: "-80px 0px -80% 0px" }
+      {rootMargin: "-80px 0px -80% 0px"},
     );
 
     for (const heading of tocHeadings) {
@@ -38,7 +38,7 @@ export default function TableOfContents({ headings }: Props) {
   if (tocHeadings.length === 0) return null;
 
   return (
-    <nav className="hidden xl:block w-[250px] shrink-0">
+    <nav className="hidden xl:block xl:col-span-3">
       <div className="sticky top-[3.75rem] h-[calc(100vh-3.75rem)] overflow-y-auto py-6 pl-4">
         <h2 className="font-semibold text-sm text-zinc-400 uppercase tracking-wider mb-3">
           On this page
@@ -55,7 +55,7 @@ export default function TableOfContents({ headings }: Props) {
                     ? "text-orange-500"
                     : "text-zinc-400 hover:text-zinc-200"
                 }`}
-                style={{ paddingTop: "0.25rem", paddingBottom: "0.25rem" }}
+                style={{paddingTop: "0.25rem", paddingBottom: "0.25rem"}}
               >
                 {heading.text}
               </a>

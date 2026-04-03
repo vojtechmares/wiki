@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Navigation from "../../../components/Navigation.astro";
+import GridLayout from "../../../components/GridLayout.astro";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import {
@@ -31,7 +32,8 @@ const entries = await getEntriesByDomainAndFormat(domain, format);
 >
   <Navigation />
 
-  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <GridLayout class="py-12">
+    <main class="lg:col-start-4 lg:col-span-6">
     <div class="mb-10">
       <p class="text-sm text-zinc-500 mb-1">
         <a href={`/${domain}/`} class="hover:text-orange-500 no-underline transition-colors">
@@ -82,5 +84,6 @@ const entries = await getEntriesByDomainAndFormat(domain, format);
     ) : (
       <p class="text-zinc-500 italic">No articles yet. Check back soon.</p>
     )}
-  </main>
+    </main>
+  </GridLayout>
 </BaseLayout>

@@ -13,19 +13,21 @@ interface Props {
   currentSlug?: string;
 }
 
-const { domain, currentFormat, currentSlug } = Astro.props;
+const {domain, currentFormat, currentSlug} = Astro.props;
 const entries = await getEntriesByDomain(domain);
 
 const entriesByFormat = FORMATS.map((format) => ({
   format,
   entries: entries.filter((e) => e.format === format),
-})).filter(({ entries }) => entries.length > 0);
+})).filter(({entries}) => entries.length > 0);
 ---
 
-<aside class="hidden lg:block w-[250px] shrink-0">
-  <div class="sticky top-[3.75rem] h-[calc(100vh-3.75rem)] overflow-y-auto py-6 pr-4">
+<aside class="hidden lg:block lg:col-span-3">
+  <div
+    class="sticky top-[3.75rem] h-[calc(100vh-3.75rem)] overflow-y-auto py-6 pr-4"
+  >
     {
-      entriesByFormat.map(({ format, entries }) => (
+      entriesByFormat.map(({format, entries}) => (
         <div class="mb-5">
           <h2 class="font-[family-name:var(--font-heading)] font-semibold text-xs text-zinc-400 uppercase tracking-wider mb-2">
             {FORMAT_META[format].label}

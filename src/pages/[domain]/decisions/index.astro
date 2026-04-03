@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Navigation from "../../../components/Navigation.astro";
+import GridLayout from "../../../components/GridLayout.astro";
 import { Card, CardHeader, CardTitle, CardDescription } from "../../../components/ui/card";
 import { Badge } from "../../../components/ui/badge";
 import { DOMAINS, DOMAIN_META, getDecisionsByTag, type Domain } from "../../../lib/collections";
@@ -28,7 +29,8 @@ const statusColors: Record<string, string> = {
 >
   <Navigation />
 
-  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <GridLayout class="py-12">
+    <main class="lg:col-start-4 lg:col-span-6">
     <div class="mb-10">
       <div class="mb-4">
         <a
@@ -81,5 +83,6 @@ const statusColors: Record<string, string> = {
     ) : (
       <p class="text-sm text-zinc-500 italic">No decisions related to {meta.label.toLowerCase()} yet.</p>
     )}
-  </main>
+    </main>
+  </GridLayout>
 </BaseLayout>

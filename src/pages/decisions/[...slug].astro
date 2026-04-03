@@ -2,6 +2,7 @@
 import { render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navigation from "../../components/Navigation.astro";
+import GridLayout from "../../components/GridLayout.astro";
 import { getDecisions } from "../../lib/collections";
 import { articleJsonLd } from "../../lib/structured-data";
 import TableOfContents from "../../components/TableOfContents";
@@ -42,9 +43,8 @@ const jsonLd = articleJsonLd({
 >
   <Navigation />
 
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="lg:grid lg:grid-cols-[1fr_200px] lg:gap-8">
-      <article class="prose prose-invert prose-zinc max-w-none">
+  <GridLayout class="py-12">
+      <article class="prose prose-invert prose-zinc max-w-none lg:col-start-4 lg:col-span-6">
         <header class="not-prose mb-8">
           <div class="mb-4">
             <a
@@ -98,11 +98,10 @@ const jsonLd = articleJsonLd({
         <Content />
       </article>
 
-      <aside class="hidden lg:block">
+      <aside class="hidden lg:block lg:col-span-3">
         <div class="sticky top-20">
           <TableOfContents headings={headings} client:idle />
         </div>
       </aside>
-    </div>
-  </div>
+  </GridLayout>
 </BaseLayout>
