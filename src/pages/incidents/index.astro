@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navigation from "../../components/Navigation.astro";
 import { getIncidents } from "../../lib/collections";
+import { Badge } from "../../components/ui/badge";
 
 const incidents = await getIncidents();
 
@@ -48,14 +49,9 @@ const severityColors: Record<string, string> = {
                   })}
                 </time>
                 {entry.data.severity && (
-                  <span
-                    class:list={[
-                      "px-1.5 py-0.5 text-xs border",
-                      severityColors[entry.data.severity],
-                    ]}
-                  >
+                  <Badge className={severityColors[entry.data.severity]}>
                     {entry.data.severity}
-                  </span>
+                  </Badge>
                 )}
               </div>
               <h2 class="font-[family-name:var(--font-heading)] text-lg font-semibold text-zinc-100 mb-1 group-hover:text-orange-500 transition-colors">
@@ -65,9 +61,7 @@ const severityColors: Record<string, string> = {
               {entry.data.tags.length > 0 && (
                 <div class="flex gap-1.5 mt-3">
                   {entry.data.tags.map((tag: string) => (
-                    <span class="px-1.5 py-0.5 bg-zinc-700 border border-zinc-600 text-zinc-400 text-xs">
-                      {tag}
-                    </span>
+                    <Badge variant="outline">{tag}</Badge>
                   ))}
                 </div>
               )}

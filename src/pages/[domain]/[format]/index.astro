@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Navigation from "../../../components/Navigation.astro";
+import { Badge } from "../../../components/ui/badge";
 import {
   DOMAINS,
   DOMAIN_META,
@@ -65,9 +66,7 @@ const entries = await getEntriesByDomainAndFormat(domain, format);
                 {entry.data.tags.length > 0 && (
                   <div class="flex gap-1.5">
                     {entry.data.tags.map((tag: string) => (
-                      <span class="px-1.5 py-0.5 bg-zinc-700 text-zinc-400">
-                        {tag}
-                      </span>
+                      <Badge variant="outline">{tag}</Badge>
                     ))}
                   </div>
                 )}

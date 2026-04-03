@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navigation from "../../components/Navigation.astro";
 import { getDecisions } from "../../lib/collections";
+import { Badge } from "../../components/ui/badge";
 
 const decisions = await getDecisions();
 
@@ -49,14 +50,9 @@ const statusColors: Record<string, string> = {
                     day: "numeric",
                   })}
                 </time>
-                <span
-                  class:list={[
-                    "px-1.5 py-0.5 text-xs border",
-                    statusColors[entry.data.status],
-                  ]}
-                >
+                <Badge className={statusColors[entry.data.status]}>
                   {entry.data.status}
-                </span>
+                </Badge>
               </div>
               <h2 class="font-[family-name:var(--font-heading)] text-lg font-semibold text-zinc-100 mb-1 group-hover:text-orange-500 transition-colors">
                 {entry.data.title}
@@ -65,9 +61,7 @@ const statusColors: Record<string, string> = {
               {entry.data.tags.length > 0 && (
                 <div class="flex gap-1.5 mt-3">
                   {entry.data.tags.map((tag: string) => (
-                    <span class="px-1.5 py-0.5 bg-zinc-700 border border-zinc-600 text-zinc-400 text-xs">
-                      {tag}
-                    </span>
+                    <Badge variant="outline">{tag}</Badge>
                   ))}
                 </div>
               )}
