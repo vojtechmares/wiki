@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navigation from "../components/Navigation.astro";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../components/ui/card";
 import { DOMAINS, DOMAIN_META, getEntriesByDomain, getIncidents, getDecisions } from "../lib/collections";
 import { websiteJsonLd } from "../lib/structured-data";
 
@@ -40,40 +41,49 @@ const domainsWithCount = await Promise.all(
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       {
         domainsWithCount.map(({ domain, label, description, count }) => (
-          <a
-            href={`/${domain}/`}
-            class="group block p-6 bg-zinc-800 border border-zinc-700 no-underline transition-colors hover:border-orange-500"
-          >
-            <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-zinc-100 mb-2 group-hover:text-orange-500 transition-colors">
-              {label}
-            </h2>
-            <p class="text-sm text-zinc-400 mb-3">{description}</p>
-            <span class="text-xs text-zinc-500">{count} {count === 1 ? "article" : "articles"}</span>
+          <a href={`/${domain}/`} class="group block no-underline">
+            <Card className="h-full transition-colors group-hover:ring-orange-500">
+              <CardHeader>
+                <CardTitle className="text-xl group-hover:text-orange-500 transition-colors">
+                  {label}
+                </CardTitle>
+                <CardDescription>{description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <span class="text-xs text-muted-foreground">{count} {count === 1 ? "article" : "articles"}</span>
+              </CardContent>
+            </Card>
           </a>
         ))
       }
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12">
-      <a
-        href="/incidents/"
-        class="group block p-6 bg-zinc-800 border border-zinc-700 no-underline transition-colors hover:border-orange-500"
-      >
-        <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-zinc-100 mb-2 group-hover:text-orange-500 transition-colors">
-          Incidents
-        </h2>
-        <p class="text-sm text-zinc-400 mb-3">Post-mortems, root cause analysis, and action items from production incidents.</p>
-        <span class="text-xs text-zinc-500">{incidents.length} {incidents.length === 1 ? "incident" : "incidents"}</span>
+      <a href="/incidents/" class="group block no-underline">
+        <Card className="h-full transition-colors group-hover:ring-orange-500">
+          <CardHeader>
+            <CardTitle className="text-xl group-hover:text-orange-500 transition-colors">
+              Incidents
+            </CardTitle>
+            <CardDescription>Post-mortems, root cause analysis, and action items from production incidents.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <span class="text-xs text-muted-foreground">{incidents.length} {incidents.length === 1 ? "incident" : "incidents"}</span>
+          </CardContent>
+        </Card>
       </a>
-      <a
-        href="/decisions/"
-        class="group block p-6 bg-zinc-800 border border-zinc-700 no-underline transition-colors hover:border-orange-500"
-      >
-        <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-zinc-100 mb-2 group-hover:text-orange-500 transition-colors">
-          Decisions
-        </h2>
-        <p class="text-sm text-zinc-400 mb-3">Architecture Decision Records capturing why choices were made and their consequences.</p>
-        <span class="text-xs text-zinc-500">{decisions.length} {decisions.length === 1 ? "decision" : "decisions"}</span>
+      <a href="/decisions/" class="group block no-underline">
+        <Card className="h-full transition-colors group-hover:ring-orange-500">
+          <CardHeader>
+            <CardTitle className="text-xl group-hover:text-orange-500 transition-colors">
+              Decisions
+            </CardTitle>
+            <CardDescription>Architecture Decision Records capturing why choices were made and their consequences.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <span class="text-xs text-muted-foreground">{decisions.length} {decisions.length === 1 ? "decision" : "decisions"}</span>
+          </CardContent>
+        </Card>
       </a>
     </div>
   </main>

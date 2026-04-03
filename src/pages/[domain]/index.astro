@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Navigation from "../../components/Navigation.astro";
+import { Card, CardHeader, CardTitle, CardDescription } from "../../components/ui/card";
 import {
   DOMAINS,
   DOMAIN_META,
@@ -59,14 +60,15 @@ const entriesByFormat = FORMATS.map((format) => ({
             <ul class="space-y-3">
               {entries.map((entry) => (
                 <li>
-                  <a
-                    href={`/${domain}/${entry.format}/${entry.slug}/`}
-                    class="group block p-4 bg-zinc-800 border border-zinc-700 no-underline transition-colors hover:border-orange-500"
-                  >
-                    <h3 class="font-[family-name:var(--font-heading)] text-base font-semibold text-zinc-100 mb-1 group-hover:text-orange-500 transition-colors">
-                      {entry.data.title}
-                    </h3>
-                    <p class="text-sm text-zinc-400">{entry.data.description}</p>
+                  <a href={`/${domain}/${entry.format}/${entry.slug}/`} class="group block no-underline">
+                    <Card size="sm" className="transition-colors group-hover:ring-orange-500">
+                      <CardHeader>
+                        <CardTitle className="group-hover:text-orange-500 transition-colors">
+                          {entry.data.title}
+                        </CardTitle>
+                        <CardDescription>{entry.data.description}</CardDescription>
+                      </CardHeader>
+                    </Card>
                   </a>
                 </li>
               ))}
@@ -94,14 +96,15 @@ const entriesByFormat = FORMATS.map((format) => ({
         <ul class="space-y-3">
           {relatedDecisions.map((entry) => (
             <li>
-              <a
-                href={`/decisions/${entry.slug}/`}
-                class="group block p-4 bg-zinc-800 border border-zinc-700 no-underline transition-colors hover:border-orange-500"
-              >
-                <h3 class="font-[family-name:var(--font-heading)] text-base font-semibold text-zinc-100 mb-1 group-hover:text-orange-500 transition-colors">
-                  {entry.data.title}
-                </h3>
-                <p class="text-sm text-zinc-400">{entry.data.description}</p>
+              <a href={`/decisions/${entry.slug}/`} class="group block no-underline">
+                <Card size="sm" className="transition-colors group-hover:ring-orange-500">
+                  <CardHeader>
+                    <CardTitle className="group-hover:text-orange-500 transition-colors">
+                      {entry.data.title}
+                    </CardTitle>
+                    <CardDescription>{entry.data.description}</CardDescription>
+                  </CardHeader>
+                </Card>
               </a>
             </li>
           ))}
