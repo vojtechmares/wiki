@@ -1,5 +1,6 @@
 ---
 import { DOMAINS, DOMAIN_META } from "../lib/collections";
+import Search from "./Search";
 
 const pathname = Astro.url.pathname;
 ---
@@ -56,6 +57,8 @@ const pathname = Astro.url.pathname;
         >
           Decisions
         </a>
+        <span class="w-px h-4 bg-zinc-700 mx-1"></span>
+        <Search client:idle />
       </div>
 
       <!-- Mobile menu button -->
@@ -72,6 +75,9 @@ const pathname = Astro.url.pathname;
 
     <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden md:hidden pb-3 border-t border-zinc-800">
+      <div class="px-3 py-2">
+        <Search client:idle />
+      </div>
       {
         DOMAINS.map((domain) => {
           const isActive = pathname.startsWith(`/${domain}`);
