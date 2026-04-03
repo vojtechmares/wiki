@@ -7,6 +7,7 @@ import {
   FORMATS,
   FORMAT_META,
   getEntriesByDomain,
+  getDecisionsByTag,
   type Domain,
 } from "../../lib/collections";
 
@@ -17,6 +18,8 @@ export function getStaticPaths() {
 const { domain } = Astro.params as { domain: Domain };
 const meta = DOMAIN_META[domain];
 const entries = await getEntriesByDomain(domain);
+
+const relatedDecisions = await getDecisionsByTag(domain);
 
 const entriesByFormat = FORMATS.map((format) => ({
   format,
@@ -74,5 +77,36 @@ const entriesByFormat = FORMATS.map((format) => ({
         </section>
       ))
     }
+
+    {relatedDecisions.length > 0 && (
+      <section class="mb-10">
+        <div class="flex items-baseline justify-between mb-4">
+          <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-zinc-200">
+            Related Decisions
+          </h2>
+          <a
+            href={`/${domain}/decisions/`}
+            class="text-sm text-zinc-400 hover:text-orange-500 no-underline transition-colors"
+          >
+            View all
+          </a>
+        </div>
+        <ul class="space-y-3">
+          {relatedDecisions.map((entry) => (
+            <li>
+              <a
+                href={`/decisions/${entry.slug}/`}
+                class="group block p-4 bg-zinc-800 border border-zinc-700 no-underline transition-colors hover:border-orange-500"
+              >
+                <h3 class="font-[family-name:var(--font-heading)] text-base font-semibold text-zinc-100 mb-1 group-hover:text-orange-500 transition-colors">
+                  {entry.data.title}
+                </h3>
+                <p class="text-sm text-zinc-400">{entry.data.description}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
   </main>
 </BaseLayout>

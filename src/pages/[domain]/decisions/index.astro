@@ -1,0 +1,87 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Navigation from "../../../components/Navigation.astro";
+import { DOMAINS, DOMAIN_META, getDecisionsByTag, type Domain } from "../../../lib/collections";
+
+export function getStaticPaths() {
+  return DOMAINS.map((domain) => ({ params: { domain } }));
+}
+
+const { domain } = Astro.params as { domain: Domain };
+const meta = DOMAIN_META[domain];
+const decisions = await getDecisionsByTag(domain);
+
+const statusColors: Record<string, string> = {
+  draft: "bg-zinc-800 text-zinc-300 border-zinc-600",
+  proposed: "bg-blue-900 text-blue-300 border-blue-700",
+  accepted: "bg-green-900 text-green-300 border-green-700",
+  deprecated: "bg-yellow-900 text-yellow-300 border-yellow-700",
+  superseded: "bg-zinc-800 text-zinc-400 border-zinc-600",
+};
+---
+
+<BaseLayout
+  title={`${meta.label} Decisions`}
+  description={`Architecture Decision Records related to ${meta.label.toLowerCase()}.`}
+>
+  <Navigation />
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="mb-10">
+      <div class="mb-4">
+        <a
+          href={`/${domain}/`}
+          class="text-sm text-zinc-400 hover:text-orange-500 no-underline transition-colors"
+        >
+          &larr; {meta.label}
+        </a>
+      </div>
+      <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-2">
+        {meta.label} Decisions
+      </h1>
+      <p class="text-zinc-400">
+        Architecture Decision Records related to {meta.label.toLowerCase()}.
+      </p>
+    </div>
+
+    {decisions.length > 0 ? (
+      <ul class="space-y-4">
+        {decisions.map((entry) => (
+          <li>
+            <a
+              href={`/decisions/${entry.slug}/`}
+              class="group block p-5 bg-zinc-800 border border-zinc-700 no-underline transition-colors hover:border-orange-500"
+            >
+              <div class="flex items-center gap-3 mb-2">
+                <time
+                  datetime={entry.data.pubDate.toISOString()}
+                  class="text-sm text-zinc-500 tabular-nums"
+                >
+                  {entry.data.pubDate.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </time>
+                <span
+                  class:list={[
+                    "px-1.5 py-0.5 text-xs border",
+                    statusColors[entry.data.status],
+                  ]}
+                >
+                  {entry.data.status}
+                </span>
+              </div>
+              <h2 class="font-[family-name:var(--font-heading)] text-lg font-semibold text-zinc-100 mb-1 group-hover:text-orange-500 transition-colors">
+                {entry.data.title}
+              </h2>
+              <p class="text-sm text-zinc-400">{entry.data.description}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="text-sm text-zinc-500 italic">No decisions related to {meta.label.toLowerCase()} yet.</p>
+    )}
+  </main>
+</BaseLayout>

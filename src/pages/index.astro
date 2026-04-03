@@ -1,13 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navigation from "../components/Navigation.astro";
-import { DOMAINS, DOMAIN_META, getEntriesByDomain } from "../lib/collections";
+import { DOMAINS, DOMAIN_META, getEntriesByDomain, getIncidents, getDecisions } from "../lib/collections";
 import { websiteJsonLd } from "../lib/structured-data";
 
 const jsonLd = websiteJsonLd({
   url: Astro.site?.toString() || "",
   name: "DevOps Wiki",
 });
+
+const incidents = await getIncidents();
+const decisions = await getDecisions();
 
 const domainsWithCount = await Promise.all(
   DOMAINS.map(async (domain) => {
@@ -49,6 +52,29 @@ const domainsWithCount = await Promise.all(
           </a>
         ))
       }
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12">
+      <a
+        href="/incidents/"
+        class="group block p-6 bg-zinc-800 border border-zinc-700 no-underline transition-colors hover:border-orange-500"
+      >
+        <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-zinc-100 mb-2 group-hover:text-orange-500 transition-colors">
+          Incidents
+        </h2>
+        <p class="text-sm text-zinc-400 mb-3">Post-mortems, root cause analysis, and action items from production incidents.</p>
+        <span class="text-xs text-zinc-500">{incidents.length} {incidents.length === 1 ? "incident" : "incidents"}</span>
+      </a>
+      <a
+        href="/decisions/"
+        class="group block p-6 bg-zinc-800 border border-zinc-700 no-underline transition-colors hover:border-orange-500"
+      >
+        <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-zinc-100 mb-2 group-hover:text-orange-500 transition-colors">
+          Decisions
+        </h2>
+        <p class="text-sm text-zinc-400 mb-3">Architecture Decision Records capturing why choices were made and their consequences.</p>
+        <span class="text-xs text-zinc-500">{decisions.length} {decisions.length === 1 ? "decision" : "decisions"}</span>
+      </a>
     </div>
   </main>
 </BaseLayout>

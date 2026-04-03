@@ -1,0 +1,82 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navigation from "../../components/Navigation.astro";
+import { getIncidents } from "../../lib/collections";
+
+const incidents = await getIncidents();
+
+const severityColors: Record<string, string> = {
+  critical: "bg-red-900 text-red-300 border-red-700",
+  major: "bg-orange-900 text-orange-300 border-orange-700",
+  minor: "bg-yellow-900 text-yellow-300 border-yellow-700",
+};
+---
+
+<BaseLayout
+  title="Incidents"
+  description="Post-mortems and incident reports. Time-bound records of outages, their root causes, impact, and action items."
+>
+  <Navigation />
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="mb-10">
+      <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-2">
+        Incidents
+      </h1>
+      <p class="text-zinc-400">
+        Post-mortems and incident reports. Time-bound records of outages, their root causes, impact, and action items.
+      </p>
+    </div>
+
+    {incidents.length > 0 ? (
+      <ul class="space-y-4">
+        {incidents.map((entry) => (
+          <li>
+            <a
+              href={`/incidents/${entry.slug}/`}
+              class="group block p-5 bg-zinc-800 border border-zinc-700 no-underline transition-colors hover:border-orange-500"
+            >
+              <div class="flex items-center gap-3 mb-2">
+                <time
+                  datetime={entry.data.pubDate.toISOString()}
+                  class="text-sm text-zinc-500 tabular-nums"
+                >
+                  {entry.data.pubDate.toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </time>
+                {entry.data.severity && (
+                  <span
+                    class:list={[
+                      "px-1.5 py-0.5 text-xs border",
+                      severityColors[entry.data.severity],
+                    ]}
+                  >
+                    {entry.data.severity}
+                  </span>
+                )}
+              </div>
+              <h2 class="font-[family-name:var(--font-heading)] text-lg font-semibold text-zinc-100 mb-1 group-hover:text-orange-500 transition-colors">
+                {entry.data.title}
+              </h2>
+              <p class="text-sm text-zinc-400">{entry.data.description}</p>
+              {entry.data.tags.length > 0 && (
+                <div class="flex gap-1.5 mt-3">
+                  {entry.data.tags.map((tag: string) => (
+                    <span class="px-1.5 py-0.5 bg-zinc-700 border border-zinc-600 text-zinc-400 text-xs">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <p class="text-sm text-zinc-500 italic">No incidents recorded yet.</p>
+    )}
+  </main>
+</BaseLayout>

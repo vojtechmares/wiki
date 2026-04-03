@@ -33,6 +33,29 @@ const pathname = Astro.url.pathname;
             );
           })
         }
+        <span class="w-px h-4 bg-zinc-700 mx-1"></span>
+        <a
+          href="/incidents/"
+          class:list={[
+            "px-3 py-1.5 text-sm no-underline transition-colors",
+            pathname.startsWith("/incidents")
+              ? "text-orange-500 bg-zinc-800"
+              : "text-zinc-300 hover:text-zinc-100 hover:bg-zinc-800",
+          ]}
+        >
+          Incidents
+        </a>
+        <a
+          href="/decisions/"
+          class:list={[
+            "px-3 py-1.5 text-sm no-underline transition-colors",
+            pathname.startsWith("/decisions")
+              ? "text-orange-500 bg-zinc-800"
+              : "text-zinc-300 hover:text-zinc-100 hover:bg-zinc-800",
+          ]}
+        >
+          Decisions
+        </a>
       </div>
 
       <!-- Mobile menu button -->
@@ -67,6 +90,30 @@ const pathname = Astro.url.pathname;
           );
         })
       }
+      <div class="border-t border-zinc-800 mt-1 pt-1">
+        <a
+          href="/incidents/"
+          class:list={[
+            "block px-3 py-2 text-sm no-underline",
+            pathname.startsWith("/incidents")
+              ? "text-orange-500 bg-zinc-800"
+              : "text-zinc-300 hover:text-zinc-100",
+          ]}
+        >
+          Incidents
+        </a>
+        <a
+          href="/decisions/"
+          class:list={[
+            "block px-3 py-2 text-sm no-underline",
+            pathname.startsWith("/decisions")
+              ? "text-orange-500 bg-zinc-800"
+              : "text-zinc-300 hover:text-zinc-100",
+          ]}
+        >
+          Decisions
+        </a>
+      </div>
     </div>
   </div>
 </nav>

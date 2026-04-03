@@ -114,3 +114,26 @@ export async function getAllEntries() {
   );
   return all.flat();
 }
+
+export async function getIncidents() {
+  const entries = await getCollection("incidents", ({ data }) => !data.draft);
+  return entries
+    .map((entry) => ({ ...entry, slug: entry.id }))
+    .sort(
+      (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+    );
+}
+
+export async function getDecisions() {
+  const entries = await getCollection("decisions", ({ data }) => !data.draft);
+  return entries
+    .map((entry) => ({ ...entry, slug: entry.id }))
+    .sort(
+      (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+    );
+}
+
+export async function getDecisionsByTag(tag: string) {
+  const decisions = await getDecisions();
+  return decisions.filter((entry) => entry.data.tags.includes(tag));
+}
