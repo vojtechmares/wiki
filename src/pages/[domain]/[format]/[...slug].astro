@@ -1,24 +1,24 @@
 ---
 import { render } from "astro:content";
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import Navigation from "../../components/Navigation.astro";
-import ContentLayout from "../../components/ContentLayout.astro";
-import { getAllEntries, type Category } from "../../lib/collections";
-import { articleJsonLd } from "../../lib/structured-data";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Navigation from "../../../components/Navigation.astro";
+import ContentLayout from "../../../components/ContentLayout.astro";
+import { getAllEntries, type Domain, type Format } from "../../../lib/collections";
+import { articleJsonLd } from "../../../lib/structured-data";
 
 export async function getStaticPaths() {
   const entries = await getAllEntries();
   return entries.map((entry) => ({
-    params: { category: entry.category, slug: entry.id },
-    props: { entry, category: entry.category },
+    params: { domain: entry.domain, format: entry.format, slug: entry.slug },
+    props: { entry },
   }));
 }
 
-const { entry, category } = Astro.props;
+const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
 
 const ogImage = new URL(
-  `/og/${category}/${entry.id}.png`,
+  `/og/${entry.domain}/${entry.format}/${entry.slug}.png`,
   Astro.site
 ).toString();
 
@@ -40,8 +40,9 @@ const jsonLd = articleJsonLd({
   <Navigation />
 
   <ContentLayout
-    category={category as Category}
-    currentSlug={entry.id}
+    domain={entry.domain as Domain}
+    format={entry.format as Format}
+    currentSlug={entry.slug}
     headings={headings}
   >
     <header class="not-prose mb-8">

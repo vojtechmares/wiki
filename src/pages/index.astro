@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navigation from "../components/Navigation.astro";
-import { CATEGORIES, CATEGORY_META, getEntriesByCategory } from "../lib/collections";
+import { DOMAINS, DOMAIN_META, getEntriesByDomain } from "../lib/collections";
 import { websiteJsonLd } from "../lib/structured-data";
 
 const jsonLd = websiteJsonLd({
@@ -9,10 +9,10 @@ const jsonLd = websiteJsonLd({
   name: "DevOps Wiki",
 });
 
-const categoriesWithCount = await Promise.all(
-  CATEGORIES.map(async (category) => {
-    const entries = await getEntriesByCategory(category);
-    return { category, ...CATEGORY_META[category], count: entries.length };
+const domainsWithCount = await Promise.all(
+  DOMAINS.map(async (domain) => {
+    const entries = await getEntriesByDomain(domain);
+    return { domain, ...DOMAIN_META[domain], count: entries.length };
   })
 );
 ---
@@ -36,9 +36,9 @@ const categoriesWithCount = await Promise.all(
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       {
-        categoriesWithCount.map(({ category, label, description, count }) => (
+        domainsWithCount.map(({ domain, label, description, count }) => (
           <a
-            href={`/${category}/`}
+            href={`/${domain}/`}
             class="group block p-6 bg-zinc-800 border border-zinc-700 no-underline transition-colors hover:border-orange-500"
           >
             <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-zinc-100 mb-2 group-hover:text-orange-500 transition-colors">

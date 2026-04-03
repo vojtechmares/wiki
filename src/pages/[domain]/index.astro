@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Navigation from "../../components/Navigation.astro";
+import {
+  DOMAINS,
+  DOMAIN_META,
+  FORMATS,
+  FORMAT_META,
+  getEntriesByDomain,
+  type Domain,
+} from "../../lib/collections";
+
+export function getStaticPaths() {
+  return DOMAINS.map((domain) => ({ params: { domain } }));
+}
+
+const { domain } = Astro.params as { domain: Domain };
+const meta = DOMAIN_META[domain];
+const entries = await getEntriesByDomain(domain);
+
+const entriesByFormat = FORMATS.map((format) => ({
+  format,
+  ...FORMAT_META[format],
+  entries: entries.filter((e) => e.format === format),
+}));
+---
+
+<BaseLayout title={meta.label} description={meta.description}>
+  <Navigation />
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="mb-10">
+      <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-2">
+        {meta.label}
+      </h1>
+      <p class="text-zinc-400">{meta.description}</p>
+    </div>
+
+    {
+      entriesByFormat.map(({ format, label, description, entries }) => (
+        <section class="mb-10">
+          <div class="flex items-baseline justify-between mb-4">
+            <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-zinc-200">
+              {label}
+            </h2>
+            {entries.length > 0 && (
+              <a
+                href={`/${domain}/${format}/`}
+                class="text-sm text-zinc-400 hover:text-orange-500 no-underline transition-colors"
+              >
+                View all
+              </a>
+            )}
+          </div>
+          {entries.length > 0 ? (
+            <ul class="space-y-3">
+              {entries.map((entry) => (
+                <li>
+                  <a
+                    href={`/${domain}/${entry.format}/${entry.slug}/`}
+                    class="group block p-4 bg-zinc-800 border border-zinc-700 no-underline transition-colors hover:border-orange-500"
+                  >
+                    <h3 class="font-[family-name:var(--font-heading)] text-base font-semibold text-zinc-100 mb-1 group-hover:text-orange-500 transition-colors">
+                      {entry.data.title}
+                    </h3>
+                    <p class="text-sm text-zinc-400">{entry.data.description}</p>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p class="text-sm text-zinc-500 italic">{description} &mdash; coming soon.</p>
+          )}
+        </section>
+      ))
+    }
+  </main>
+</BaseLayout>

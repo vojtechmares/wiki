@@ -5,7 +5,7 @@ const allEntries = await getAllEntries();
 
 const pages = Object.fromEntries(
   allEntries.map((entry) => [
-    `${entry.category}/${entry.id}`,
+    `${entry.domain}/${entry.format}/${entry.slug}`,
     { title: entry.data.title, description: entry.data.description },
   ])
 );

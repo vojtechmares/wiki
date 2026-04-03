@@ -1,5 +1,5 @@
 ---
-import { CATEGORIES, CATEGORY_META } from "../lib/collections";
+import { DOMAINS, DOMAIN_META } from "../lib/collections";
 
 const pathname = Astro.url.pathname;
 ---
@@ -16,11 +16,11 @@ const pathname = Astro.url.pathname;
 
       <div class="hidden md:flex items-center gap-1">
         {
-          CATEGORIES.map((category) => {
-            const isActive = pathname.startsWith(`/${category}`);
+          DOMAINS.map((domain) => {
+            const isActive = pathname.startsWith(`/${domain}`);
             return (
               <a
-                href={`/${category}/`}
+                href={`/${domain}/`}
                 class:list={[
                   "px-3 py-1.5 text-sm no-underline transition-colors",
                   isActive
@@ -28,7 +28,7 @@ const pathname = Astro.url.pathname;
                     : "text-zinc-300 hover:text-zinc-100 hover:bg-zinc-800",
                 ]}
               >
-                {CATEGORY_META[category].label}
+                {DOMAIN_META[domain].label}
               </a>
             );
           })
@@ -50,11 +50,11 @@ const pathname = Astro.url.pathname;
     <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden md:hidden pb-3 border-t border-zinc-800">
       {
-        CATEGORIES.map((category) => {
-          const isActive = pathname.startsWith(`/${category}`);
+        DOMAINS.map((domain) => {
+          const isActive = pathname.startsWith(`/${domain}`);
           return (
             <a
-              href={`/${category}/`}
+              href={`/${domain}/`}
               class:list={[
                 "block px-3 py-2 text-sm no-underline",
                 isActive
@@ -62,7 +62,7 @@ const pathname = Astro.url.pathname;
                   : "text-zinc-300 hover:text-zinc-100",
               ]}
             >
-              {CATEGORY_META[category].label}
+              {DOMAIN_META[domain].label}
             </a>
           );
         })

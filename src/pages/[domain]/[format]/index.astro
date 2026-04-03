@@ -1,39 +1,53 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import Navigation from "../../components/Navigation.astro";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Navigation from "../../../components/Navigation.astro";
 import {
-  CATEGORIES,
-  CATEGORY_META,
-  getEntriesByCategory,
-  type Category,
-} from "../../lib/collections";
+  DOMAINS,
+  DOMAIN_META,
+  FORMATS,
+  FORMAT_META,
+  getEntriesByDomainAndFormat,
+  type Domain,
+  type Format,
+} from "../../../lib/collections";
 
 export function getStaticPaths() {
-  return CATEGORIES.map((category) => ({ params: { category } }));
+  return DOMAINS.flatMap((domain) =>
+    FORMATS.map((format) => ({ params: { domain, format } }))
+  );
 }
 
-const { category } = Astro.params as { category: Category };
-const meta = CATEGORY_META[category];
-const entries = await getEntriesByCategory(category);
+const { domain, format } = Astro.params as { domain: Domain; format: Format };
+const domainMeta = DOMAIN_META[domain];
+const formatMeta = FORMAT_META[format];
+const entries = await getEntriesByDomainAndFormat(domain, format);
 ---
 
-<BaseLayout title={meta.label} description={meta.description}>
+<BaseLayout
+  title={`${formatMeta.label} — ${domainMeta.label}`}
+  description={`${formatMeta.description} for ${domainMeta.label.toLowerCase()}.`}
+>
   <Navigation />
 
   <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="mb-10">
+      <p class="text-sm text-zinc-500 mb-1">
+        <a href={`/${domain}/`} class="hover:text-orange-500 no-underline transition-colors">
+          {domainMeta.label}
+        </a>
+      </p>
       <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-2">
-        {meta.label}
+        {formatMeta.label}
       </h1>
-      <p class="text-zinc-400">{meta.description}</p>
+      <p class="text-zinc-400">{formatMeta.description}</p>
     </div>
 
-    <ul class="space-y-4">
-      {
-        entries.map((entry) => (
+    {entries.length > 0 ? (
+      <ul class="space-y-4">
+        {entries.map((entry) => (
           <li>
             <a
-              href={`/${category}/${entry.id}/`}
+              href={`/${domain}/${entry.format}/${entry.slug}/`}
               class="group block p-5 bg-zinc-800 border border-zinc-700 no-underline transition-colors hover:border-orange-500"
             >
               <h2 class="font-[family-name:var(--font-heading)] text-lg font-semibold text-zinc-100 mb-1 group-hover:text-orange-500 transition-colors">
@@ -60,8 +74,10 @@ const entries = await getEntriesByCategory(category);
               </div>
             </a>
           </li>
-        ))
-      }
-    </ul>
+        ))}
+      </ul>
+    ) : (
+      <p class="text-zinc-500 italic">No articles yet. Check back soon.</p>
+    )}
   </main>
 </BaseLayout>

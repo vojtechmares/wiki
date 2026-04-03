@@ -11,29 +11,35 @@ const baseSchema = z.object({
   order: z.number().optional(),
 });
 
-const tutorials = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./content/tutorials" }),
+const infrastructure = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./content/infrastructure" }),
   schema: baseSchema,
 });
 
-const howToGuides = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./content/how-to-guides" }),
+const delivery = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./content/delivery" }),
   schema: baseSchema,
 });
 
-const explanations = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./content/explanations" }),
+const reliability = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./content/reliability" }),
   schema: baseSchema,
 });
 
-const references = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./content/references" }),
+const security = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./content/security" }),
+  schema: baseSchema,
+});
+
+const platform = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./content/platform" }),
   schema: baseSchema,
 });
 
 export const collections = {
-  tutorials,
-  "how-to-guides": howToGuides,
-  explanations,
-  references,
+  infrastructure,
+  delivery,
+  reliability,
+  security,
+  platform,
 };
