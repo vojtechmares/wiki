@@ -36,7 +36,7 @@ const entries = await getEntriesByDomainAndFormat(domain, format);
     <main class="lg:col-start-4 lg:col-span-6">
     <div class="mb-10">
       <p class="text-sm text-zinc-500 mb-1">
-        <a href={`/${domain}/`} class="hover:text-orange-500 no-underline transition-colors">
+        <a href={`/${domain}`} class="hover:text-orange-500 no-underline transition-colors">
           {domainMeta.label}
         </a>
       </p>
@@ -50,7 +50,7 @@ const entries = await getEntriesByDomainAndFormat(domain, format);
       <ul class="space-y-4">
         {entries.map((entry) => (
           <li>
-            <a href={`/${domain}/${entry.format}/${entry.slug}/`} class="group block no-underline">
+            <a href={`/${domain}/${entry.format}/${entry.slug}`} class="group block no-underline">
               <Card className="transition-colors group-hover:ring-orange-500">
                 <CardHeader>
                   <CardTitle className="text-lg group-hover:text-orange-500 transition-colors">

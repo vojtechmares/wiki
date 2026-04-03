@@ -25,7 +25,7 @@ const currentYear = new Date().getFullYear();
             <li>
               <span class="text-zinc-500 mr-1">&rarr;</span>
               <a
-                href={`/${domain}/`}
+                href={`/${domain}`}
                 class="text-orange-500 underline hover:text-orange-400 transition-colors"
               >
                 {DOMAIN_META[domain].label}
@@ -42,11 +42,11 @@ const currentYear = new Date().getFullYear();
         <ul class="mt-4 list-none space-y-1">
           <li>
             <span class="text-zinc-500 mr-1">&rarr;</span>
-            <a href="/incidents/" class="text-orange-500 underline hover:text-orange-400 transition-colors">Incidents</a>
+            <a href="/incidents" class="text-orange-500 underline hover:text-orange-400 transition-colors">Incidents</a>
           </li>
           <li>
             <span class="text-zinc-500 mr-1">&rarr;</span>
-            <a href="/decisions/" class="text-orange-500 underline hover:text-orange-400 transition-colors">Decisions</a>
+            <a href="/decisions" class="text-orange-500 underline hover:text-orange-400 transition-colors">Decisions</a>
           </li>
         </ul>
       </div>

@@ -34,7 +34,7 @@ const statusColors: Record<string, string> = {
     <div class="mb-10">
       <div class="mb-4">
         <a
-          href={`/${domain}/`}
+          href={`/${domain}`}
           class="text-sm text-zinc-400 hover:text-orange-500 no-underline transition-colors"
         >
           &larr; {meta.label}
@@ -52,7 +52,7 @@ const statusColors: Record<string, string> = {
       <ul class="space-y-4">
         {decisions.map((entry) => (
           <li>
-            <a href={`/decisions/${entry.slug}/`} class="group block no-underline">
+            <a href={`/decisions/${entry.slug}`} class="group block no-underline">
               <Card className="transition-colors group-hover:ring-orange-500">
                 <CardHeader>
                   <div class="flex items-center gap-3">

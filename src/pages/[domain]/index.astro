@@ -51,7 +51,7 @@ const entriesByFormat = FORMATS.map((format) => ({
             </h2>
             {entries.length > 0 && (
               <a
-                href={`/${domain}/${format}/`}
+                href={`/${domain}/${format}`}
                 class="text-sm text-zinc-400 hover:text-orange-500 no-underline transition-colors"
               >
                 View all
@@ -62,7 +62,7 @@ const entriesByFormat = FORMATS.map((format) => ({
             <ul class="space-y-3">
               {entries.map((entry) => (
                 <li>
-                  <a href={`/${domain}/${entry.format}/${entry.slug}/`} class="group block no-underline">
+                  <a href={`/${domain}/${entry.format}/${entry.slug}`} class="group block no-underline">
                     <Card size="sm" className="transition-colors group-hover:ring-orange-500">
                       <CardHeader>
                         <CardTitle className="group-hover:text-orange-500 transition-colors">
@@ -89,7 +89,7 @@ const entriesByFormat = FORMATS.map((format) => ({
             Related Decisions
           </h2>
           <a
-            href={`/${domain}/decisions/`}
+            href={`/${domain}/decisions`}
             class="text-sm text-zinc-400 hover:text-orange-500 no-underline transition-colors"
           >
             View all
@@ -98,7 +98,7 @@ const entriesByFormat = FORMATS.map((format) => ({
         <ul class="space-y-3">
           {relatedDecisions.map((entry) => (
             <li>
-              <a href={`/decisions/${entry.slug}/`} class="group block no-underline">
+              <a href={`/decisions/${entry.slug}`} class="group block no-underline">
                 <Card size="sm" className="transition-colors group-hover:ring-orange-500">
                   <CardHeader>
                     <CardTitle className="group-hover:text-orange-500 transition-colors">

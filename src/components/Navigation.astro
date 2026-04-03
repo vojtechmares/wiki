@@ -21,17 +21,17 @@ const pathname = Astro.url.pathname;
           DOMAINS.map((domain) => {
             const isActive = pathname.startsWith(`/${domain}`);
             return (
-              <NavLink href={`/${domain}/`} isActive={isActive}>
+              <NavLink href={`/${domain}`} isActive={isActive}>
                 {DOMAIN_META[domain].label}
               </NavLink>
             );
           })
         }
         <span class="w-px h-4 bg-zinc-700 mx-1"></span>
-        <NavLink href="/incidents/" isActive={pathname.startsWith("/incidents")}>
+        <NavLink href="/incidents" isActive={pathname.startsWith("/incidents")}>
           Incidents
         </NavLink>
-        <NavLink href="/decisions/" isActive={pathname.startsWith("/decisions")}>
+        <NavLink href="/decisions" isActive={pathname.startsWith("/decisions")}>
           Decisions
         </NavLink>
         <span class="w-px h-4 bg-zinc-700 mx-1"></span>
@@ -60,7 +60,7 @@ const pathname = Astro.url.pathname;
           const isActive = pathname.startsWith(`/${domain}`);
           return (
             <NavLink
-              href={`/${domain}/`}
+              href={`/${domain}`}
               isActive={isActive}
               className="block w-full justify-start"
             >
@@ -71,14 +71,14 @@ const pathname = Astro.url.pathname;
       }
       <div class="border-t border-zinc-800 mt-1 pt-1">
         <NavLink
-          href="/incidents/"
+          href="/incidents"
           isActive={pathname.startsWith("/incidents")}
           className="block w-full justify-start"
         >
           Incidents
         </NavLink>
         <NavLink
-          href="/decisions/"
+          href="/decisions"
           isActive={pathname.startsWith("/decisions")}
           className="block w-full justify-start"
         >

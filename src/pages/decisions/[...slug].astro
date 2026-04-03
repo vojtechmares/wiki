@@ -48,7 +48,7 @@ const jsonLd = articleJsonLd({
         <header class="not-prose mb-8">
           <div class="mb-4">
             <a
-              href="/decisions/"
+              href="/decisions"
               class="text-sm text-zinc-400 hover:text-orange-500 no-underline transition-colors"
             >
               &larr; All Decisions
@@ -86,7 +86,7 @@ const jsonLd = articleJsonLd({
             <div class="mt-4 p-3 bg-yellow-900/30 border border-yellow-700/50 text-yellow-300 text-sm">
               This decision has been superseded by{" "}
               <a
-                href={`/decisions/${entry.data.supersededBy}/`}
+                href={`/decisions/${entry.data.supersededBy}`}
                 class="text-yellow-200 underline hover:text-orange-500"
               >
                 {entry.data.supersededBy}

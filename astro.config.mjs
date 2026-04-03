@@ -6,6 +6,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   site: "https://wiki.mares.cz",
   output: "static",
+  trailingSlash: "never",
   integrations: [react(), sitemap()],
   vite: {
     plugins: [tailwindcss()],

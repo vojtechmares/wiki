@@ -41,7 +41,7 @@ const domainsWithCount = await Promise.all(
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       {
         domainsWithCount.map(({ domain, label, description, count }) => (
-          <a href={`/${domain}/`} class="group block no-underline">
+          <a href={`/${domain}`} class="group block no-underline">
             <Card className="h-full transition-colors group-hover:ring-orange-500">
               <CardHeader>
                 <CardTitle className="text-xl group-hover:text-orange-500 transition-colors">
@@ -59,7 +59,7 @@ const domainsWithCount = await Promise.all(
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12">
-      <a href="/incidents/" class="group block no-underline">
+      <a href="/incidents" class="group block no-underline">
         <Card className="h-full transition-colors group-hover:ring-orange-500">
           <CardHeader>
             <CardTitle className="text-xl group-hover:text-orange-500 transition-colors">
@@ -72,7 +72,7 @@ const domainsWithCount = await Promise.all(
           </CardContent>
         </Card>
       </a>
-      <a href="/decisions/" class="group block no-underline">
+      <a href="/decisions" class="group block no-underline">
         <Card className="h-full transition-colors group-hover:ring-orange-500">
           <CardHeader>
             <CardTitle className="text-xl group-hover:text-orange-500 transition-colors">
