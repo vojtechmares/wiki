@@ -35,13 +35,13 @@ const entriesByFormat = FORMATS.map((format) => ({
   <Navigation />
 
   <GridLayout class="py-12">
-    <main class="lg:col-start-4 lg:col-span-6">
+    <main id="main-content" class="lg:col-start-4 lg:col-span-6">
     <div class="mb-10">
       <PageBreadcrumb items={[
         { label: "Home", href: "/" },
         { label: meta.label },
       ]} />
-      <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-2 mt-3">
+      <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-2 mt-3 text-balance">
         {meta.label}
       </h1>
       <p class="text-zinc-400">{meta.description}</p>
@@ -67,7 +67,7 @@ const entriesByFormat = FORMATS.map((format) => ({
             <ul class="space-y-3">
               {entries.map((entry) => (
                 <li>
-                  <a href={`/${domain}/${entry.format}/${entry.slug}`} class="group block no-underline">
+                  <a href={`/${domain}/${entry.format}/${entry.slug}`} class="group block no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500">
                     <Card size="sm" className="transition-colors group-hover:ring-orange-500">
                       <CardHeader>
                         <CardTitle className="group-hover:text-orange-500 transition-colors">
@@ -103,7 +103,7 @@ const entriesByFormat = FORMATS.map((format) => ({
         <ul class="space-y-3">
           {relatedDecisions.map((entry) => (
             <li>
-              <a href={`/decisions/${entry.slug}`} class="group block no-underline">
+              <a href={`/decisions/${entry.slug}`} class="group block no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500">
                 <Card size="sm" className="transition-colors group-hover:ring-orange-500">
                   <CardHeader>
                     <CardTitle className="group-hover:text-orange-500 transition-colors">

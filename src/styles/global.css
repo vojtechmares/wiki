@@ -175,5 +175,37 @@
   }
   html {
     @apply font-sans;
+    color-scheme: dark;
+  }
+}
+
+/* Scroll margin for heading anchors (clears sticky nav) */
+.prose :where(h1, h2, h3, h4, h5, h6):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  scroll-margin-top: 4rem;
+}
+
+/* Balanced text-wrap for headings */
+.prose :where(h1, h2, h3):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  text-wrap: balance;
+}
+
+/* Tabular numbers for time elements */
+time {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Touch interaction improvements */
+a, button, [role="button"] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

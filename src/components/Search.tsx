@@ -125,6 +125,7 @@ export default function Search() {
         <FieldLabel className="sr-only">Search</FieldLabel>
         <div className="relative">
           <svg
+            aria-hidden="true"
             className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-zinc-400 pointer-events-none"
             fill="none"
             stroke="currentColor"
@@ -139,7 +140,13 @@ export default function Search() {
           </svg>
           <Input
             ref={inputRef}
-            type="text"
+            type="search"
+            role="combobox"
+            aria-expanded={isOpen}
+            aria-controls="search-results"
+            aria-activedescendant={isOpen && results.length > 0 ? `search-result-${selectedIndex}` : undefined}
+            aria-autocomplete="list"
+            autoComplete="off"
             value={query}
             onChange={(e) => handleChange(e.target.value)}
             onFocus={() => {
@@ -147,8 +154,8 @@ export default function Search() {
               if (query.trim()) search(query);
             }}
             onKeyDown={handleKeyDown}
-            placeholder="Search..."
-            className="h-auto w-full rounded-none md:w-48 md:focus:w-64 transition-all duration-200 bg-zinc-800 border border-zinc-700 text-zinc-100 text-sm pl-8 pr-12 py-1.5 placeholder-zinc-500 focus:outline-none focus:border-zinc-500 focus-visible:ring-0 focus-visible:border-zinc-500"
+            placeholder="Search\u2026"
+            className="h-auto w-full md:w-48 md:focus:w-64 transition-[width,border-color,box-shadow] duration-200 bg-zinc-800 border border-zinc-700 text-zinc-100 text-sm pl-8 pr-12 py-1.5 placeholder-zinc-500 focus:outline-none focus-visible:border-orange-500 focus-visible:ring-[2px] focus-visible:ring-orange-500/30"
           />
           <kbd className="hidden md:inline-flex absolute right-2 top-1/2 -translate-y-1/2 items-center gap-0.5 px-1.5 py-0.5 text-[10px] text-zinc-500 bg-zinc-700/50 border border-zinc-600 rounded">
             ⌘K
@@ -157,9 +164,9 @@ export default function Search() {
       </Field>
 
       {isOpen && results.length > 0 && (
-        <ul className="absolute top-full left-0 right-0 md:w-96 mt-1 bg-zinc-800 border border-zinc-700 shadow-lg max-h-96 overflow-y-auto z-50">
+        <ul id="search-results" role="listbox" aria-label="Search results" className="absolute top-full left-0 right-0 md:w-96 mt-1 bg-zinc-800 border border-zinc-700 shadow-lg max-h-96 overflow-y-auto z-50">
           {results.map((item, i) => (
-            <li key={item.url}>
+            <li key={item.url} id={`search-result-${i}`} role="option" aria-selected={i === selectedIndex}>
               <a
                 href={item.url}
                 onClick={(e) => {
@@ -171,7 +178,7 @@ export default function Search() {
                   i === selectedIndex ? "bg-zinc-700" : ""
                 }`}
               >
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 min-w-0">
                   <span className="text-sm text-zinc-100 truncate">
                     {item.title}
                   </span>
@@ -189,8 +196,8 @@ export default function Search() {
       )}
 
       {isOpen && query.trim() && results.length === 0 && (
-        <div className="absolute top-full left-0 right-0 md:w-96 mt-1 bg-zinc-800 border border-zinc-700 shadow-lg z-50 px-3 py-4 text-sm text-zinc-400 text-center">
-          No results for "{query}"
+        <div aria-live="polite" className="absolute top-full left-0 right-0 md:w-96 mt-1 bg-zinc-800 border border-zinc-700 shadow-lg z-50 px-3 py-4 text-sm text-zinc-400 text-center">
+          No results for &ldquo;{query}&rdquo;
         </div>
       )}
     </div>

@@ -8,6 +8,7 @@ import { articleJsonLd } from "../../lib/structured-data";
 import { PageBreadcrumb } from "../../components/PageBreadcrumb";
 import TableOfContents from "../../components/TableOfContents";
 import { Badge } from "../../components/ui/badge";
+import { SEVERITY_COLORS } from "../../lib/constants";
 
 export async function getStaticPaths() {
   const incidents = await getIncidents();
@@ -19,12 +20,6 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
-
-const severityColors: Record<string, string> = {
-  critical: "bg-red-900 text-red-300 border-red-700",
-  major: "bg-orange-900 text-orange-300 border-orange-700",
-  minor: "bg-yellow-900 text-yellow-300 border-yellow-700",
-};
 
 const jsonLd = articleJsonLd({
   title: entry.data.title,
@@ -43,14 +38,15 @@ const jsonLd = articleJsonLd({
   <Navigation />
 
   <GridLayout class="py-12">
-      <article class="prose prose-invert prose-zinc max-w-none lg:col-start-4 lg:col-span-6">
+    <main id="main-content" class="min-w-0 lg:col-start-4 lg:col-span-6">
+      <article class="prose prose-invert prose-zinc max-w-none">
         <header class="not-prose mb-8">
           <PageBreadcrumb items={[
             { label: "Home", href: "/" },
             { label: "Incidents", href: "/incidents" },
             { label: entry.data.title },
           ]} />
-          <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-3 mt-3">
+          <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-3 mt-3 text-balance">
             {entry.data.title}
           </h1>
           <p class="text-zinc-400 mb-4">{entry.data.description}</p>
@@ -63,14 +59,9 @@ const jsonLd = articleJsonLd({
               })}
             </time>
             {entry.data.severity && (
-              <span
-                class:list={[
-                  "px-1.5 py-0.5 text-xs border",
-                  severityColors[entry.data.severity],
-                ]}
-              >
+              <Badge className={SEVERITY_COLORS[entry.data.severity]}>
                 {entry.data.severity}
-              </span>
+              </Badge>
             )}
             {entry.data.tags.length > 0 && (
               <div class="flex gap-1.5">
@@ -84,9 +75,10 @@ const jsonLd = articleJsonLd({
 
         <Content />
       </article>
+    </main>
 
       <aside class="hidden lg:block lg:col-span-3">
-        <div class="sticky top-20">
+        <div class="sticky top-[3.75rem]">
           <TableOfContents headings={headings} client:idle />
         </div>
       </aside>

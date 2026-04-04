@@ -6,16 +6,9 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../..
 import { PageBreadcrumb } from "../../components/PageBreadcrumb";
 import { getDecisions } from "../../lib/collections";
 import { Badge } from "../../components/ui/badge";
+import { STATUS_COLORS } from "../../lib/constants";
 
 const decisions = await getDecisions();
-
-const statusColors: Record<string, string> = {
-  draft: "bg-zinc-800 text-zinc-300 border-zinc-600",
-  proposed: "bg-blue-900 text-blue-300 border-blue-700",
-  accepted: "bg-green-900 text-green-300 border-green-700",
-  deprecated: "bg-yellow-900 text-yellow-300 border-yellow-700",
-  superseded: "bg-zinc-800 text-zinc-400 border-zinc-600",
-};
 ---
 
 <BaseLayout
@@ -25,13 +18,13 @@ const statusColors: Record<string, string> = {
   <Navigation />
 
   <GridLayout class="py-12">
-    <main class="lg:col-start-4 lg:col-span-6">
+    <main id="main-content" class="lg:col-start-4 lg:col-span-6">
     <div class="mb-10">
       <PageBreadcrumb items={[
         { label: "Home", href: "/" },
         { label: "Decisions" },
       ]} />
-      <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-2 mt-3">
+      <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-2 mt-3 text-balance">
         Decisions
       </h1>
       <p class="text-zinc-400">
@@ -43,7 +36,7 @@ const statusColors: Record<string, string> = {
       <ul class="space-y-4">
         {decisions.map((entry) => (
           <li>
-            <a href={`/decisions/${entry.slug}`} class="group block no-underline">
+            <a href={`/decisions/${entry.slug}`} class="group block no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500">
               <Card className="transition-colors group-hover:ring-orange-500">
                 <CardHeader>
                   <div class="flex items-center gap-3">
@@ -57,7 +50,7 @@ const statusColors: Record<string, string> = {
                         day: "numeric",
                       })}
                     </time>
-                    <Badge className={statusColors[entry.data.status]}>
+                    <Badge className={STATUS_COLORS[entry.data.status]}>
                       {entry.data.status}
                     </Badge>
                   </div>

@@ -6,14 +6,9 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../..
 import { PageBreadcrumb } from "../../components/PageBreadcrumb";
 import { getIncidents } from "../../lib/collections";
 import { Badge } from "../../components/ui/badge";
+import { SEVERITY_COLORS } from "../../lib/constants";
 
 const incidents = await getIncidents();
-
-const severityColors: Record<string, string> = {
-  critical: "bg-red-900 text-red-300 border-red-700",
-  major: "bg-orange-900 text-orange-300 border-orange-700",
-  minor: "bg-yellow-900 text-yellow-300 border-yellow-700",
-};
 ---
 
 <BaseLayout
@@ -23,13 +18,13 @@ const severityColors: Record<string, string> = {
   <Navigation />
 
   <GridLayout class="py-12">
-    <main class="lg:col-start-4 lg:col-span-6">
+    <main id="main-content" class="lg:col-start-4 lg:col-span-6">
     <div class="mb-10">
       <PageBreadcrumb items={[
         { label: "Home", href: "/" },
         { label: "Incidents" },
       ]} />
-      <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-2 mt-3">
+      <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-2 mt-3 text-balance">
         Incidents
       </h1>
       <p class="text-zinc-400">
@@ -41,7 +36,7 @@ const severityColors: Record<string, string> = {
       <ul class="space-y-4">
         {incidents.map((entry) => (
           <li>
-            <a href={`/incidents/${entry.slug}`} class="group block no-underline">
+            <a href={`/incidents/${entry.slug}`} class="group block no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500">
               <Card className="transition-colors group-hover:ring-orange-500">
                 <CardHeader>
                   <div class="flex items-center gap-3">
@@ -56,7 +51,7 @@ const severityColors: Record<string, string> = {
                       })}
                     </time>
                     {entry.data.severity && (
-                      <Badge className={severityColors[entry.data.severity]}>
+                      <Badge className={SEVERITY_COLORS[entry.data.severity]}>
                         {entry.data.severity}
                       </Badge>
                     )}

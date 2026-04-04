@@ -34,14 +34,14 @@ const entries = await getEntriesByDomainAndFormat(domain, format);
   <Navigation />
 
   <GridLayout class="py-12">
-    <main class="lg:col-start-4 lg:col-span-6">
+    <main id="main-content" class="lg:col-start-4 lg:col-span-6">
     <div class="mb-10">
       <PageBreadcrumb items={[
         { label: "Home", href: "/" },
         { label: domainMeta.label, href: `/${domain}` },
         { label: formatMeta.label },
       ]} />
-      <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-2 mt-3">
+      <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-2 mt-3 text-balance">
         {formatMeta.label}
       </h1>
       <p class="text-zinc-400">{formatMeta.description}</p>
@@ -51,7 +51,7 @@ const entries = await getEntriesByDomainAndFormat(domain, format);
       <ul class="space-y-4">
         {entries.map((entry) => (
           <li>
-            <a href={`/${domain}/${entry.format}/${entry.slug}`} class="group block no-underline">
+            <a href={`/${domain}/${entry.format}/${entry.slug}`} class="group block no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500">
               <Card className="transition-colors group-hover:ring-orange-500">
                 <CardHeader>
                   <CardTitle className="text-lg group-hover:text-orange-500 transition-colors">

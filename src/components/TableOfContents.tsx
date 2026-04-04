@@ -48,7 +48,7 @@ export default function TableOfContents({headings}: Props) {
             <li key={heading.slug}>
               <a
                 href={`#${heading.slug}`}
-                className={`block text-sm no-underline transition-colors ${
+                className={`block text-sm no-underline transition-colors focus-visible:text-orange-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-orange-500/50 ${
                   heading.depth === 3 ? "pl-4" : ""
                 } ${
                   activeId === heading.slug

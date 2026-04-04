@@ -20,6 +20,7 @@ const fullTitle = `${title} | ${siteName}`;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#18181b" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL.href} />
@@ -44,6 +45,12 @@ const fullTitle = `${title} | ${siteName}`;
   <body
     class="bg-zinc-900 text-zinc-100 font-sans antialiased min-h-screen flex flex-col"
   >
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-zinc-900 focus:text-orange-500 focus:px-4 focus:py-2 focus:border focus:border-orange-500"
+    >
+      Skip to main content
+    </a>
     <slot />
     <Footer />
   </body>
