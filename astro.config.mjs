@@ -2,11 +2,13 @@ import {defineConfig, fontProviders} from "astro/config";
 import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
+import vercel from "@astrojs/vercel";
 
 export default defineConfig({
   site: "https://wiki.mares.cz",
   output: "static",
   trailingSlash: "never",
+  adapter: vercel(),
   integrations: [react(), sitemap()],
   vite: {
     plugins: [tailwindcss()],
