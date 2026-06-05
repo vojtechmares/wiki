@@ -2,7 +2,8 @@
 title: "ADR-001: Choosing a Kubernetes Distribution"
 description: "Evaluating k3s, RKE2, and upstream Kubernetes for production clusters."
 pubDate: 2024-03-15
-status: accepted
+status: superseded
+supersededBy: adr-002-choosing-k8s-distro
 tags: ["kubernetes", "infrastructure"]
 ---
 
