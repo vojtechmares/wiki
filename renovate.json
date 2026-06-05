@@ -6,6 +6,12 @@
   "minimumReleaseAge": "14 days",
   "internalChecksFilter": "strict",
   "automerge": true,
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["major"],
+      "automerge": false
+    }
+  ],
   "vulnerabilityAlerts": {
     "minimumReleaseAge": null
   }
