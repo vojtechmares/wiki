@@ -1,8 +1,19 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Navigation from "../components/Navigation.astro";
+import GridLayout from "../components/GridLayout.astro";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../components/ui/card";
-import { DOMAINS, DOMAIN_META, getEntriesByDomain, getIncidents, getDecisions } from "../lib/collections";
+import { Badge } from "../components/ui/badge";
+import {
+  DOMAINS,
+  DOMAIN_META,
+  FORMATS,
+  FORMAT_META,
+  getEntriesByDomain,
+  getAllEntries,
+  getIncidents,
+  getDecisions,
+} from "../lib/collections";
 import { websiteJsonLd } from "../lib/structured-data";
 
 const jsonLd = websiteJsonLd({
@@ -19,6 +30,14 @@ const domainsWithCount = await Promise.all(
     return { domain, ...DOMAIN_META[domain], count: entries.length };
   })
 );
+
+const recentEntries = (await getAllEntries())
+  .sort(
+    (a, b) =>
+      (b.data.updatedDate ?? b.data.pubDate).getTime() -
+      (a.data.updatedDate ?? a.data.pubDate).getTime()
+  )
+  .slice(0, 5);
 ---
 
 <BaseLayout
@@ -28,63 +47,143 @@ const domainsWithCount = await Promise.all(
 >
   <Navigation />
 
-  <main id="main-content" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <div class="mb-16">
-      <h1 class="font-[family-name:var(--font-heading)] text-4xl sm:text-5xl font-bold text-zinc-100 mb-4 text-balance">
-        DevOps Wiki
-      </h1>
-      <p class="text-lg text-zinc-300 max-w-2xl">
-        A knowledge base for DevOps and Platform engineers. Find tutorials, practical guides, deep explanations, and quick reference material.
-      </p>
-    </div>
+  <GridLayout class="py-8">
+    <main id="main-content" class="lg:col-span-12 space-y-12">
+      <!-- Hero -->
+      <section>
+        <h1 class="font-[family-name:var(--font-heading)] text-4xl sm:text-5xl font-bold text-zinc-100 mb-4 text-balance">
+          DevOps Wiki
+        </h1>
+        <p class="text-lg text-zinc-300 max-w-2xl">
+          A knowledge base for DevOps and Platform engineers. Find tutorials, practical guides, deep explanations, and quick reference material.
+        </p>
+      </section>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-      {
-        domainsWithCount.map(({ domain, label, description, count }) => (
-          <a href={`/${domain}`} class="group block no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500">
-            <Card className="h-full transition-colors group-hover:ring-orange-500">
-              <CardHeader>
-                <CardTitle className="text-xl group-hover:text-orange-500 transition-colors">
-                  {label}
-                </CardTitle>
-                <CardDescription>{description}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <span class="text-xs text-muted-foreground">{count} {count === 1 ? "article" : "articles"}</span>
-              </CardContent>
-            </Card>
-          </a>
-        ))
-      }
-    </div>
+      <!-- Browse by domain -->
+      <section>
+        <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-zinc-200 mb-4">
+          Browse by domain
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+          {
+            domainsWithCount.map(({ domain, label, description, count }) => (
+              <a href={`/${domain}`} class="group block no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500">
+                <Card className="h-full transition-colors group-hover:ring-orange-500">
+                  <CardHeader>
+                    <CardTitle className="text-lg group-hover:text-orange-500 transition-colors">
+                      {label}
+                    </CardTitle>
+                    <CardDescription>{description}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <span class="text-xs text-muted-foreground">{count} {count === 1 ? "article" : "articles"}</span>
+                  </CardContent>
+                </Card>
+              </a>
+            ))
+          }
+        </div>
+      </section>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12">
-      <a href="/incidents" class="group block no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500">
-        <Card className="h-full transition-colors group-hover:ring-orange-500">
-          <CardHeader>
-            <CardTitle className="text-xl group-hover:text-orange-500 transition-colors">
-              Incidents
-            </CardTitle>
-            <CardDescription>Post-mortems, root cause analysis, and action items from production incidents.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <span class="text-xs text-muted-foreground">{incidents.length} {incidents.length === 1 ? "incident" : "incidents"}</span>
-          </CardContent>
-        </Card>
-      </a>
-      <a href="/decisions" class="group block no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500">
-        <Card className="h-full transition-colors group-hover:ring-orange-500">
-          <CardHeader>
-            <CardTitle className="text-xl group-hover:text-orange-500 transition-colors">
-              Decisions
-            </CardTitle>
-            <CardDescription>Architecture Decision Records capturing why choices were made and their consequences.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <span class="text-xs text-muted-foreground">{decisions.length} {decisions.length === 1 ? "decision" : "decisions"}</span>
-          </CardContent>
-        </Card>
-      </a>
-    </div>
-  </main>
+      <!-- Browse by type (Diátaxis) -->
+      <section>
+        <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-zinc-200 mb-1">
+          Browse by type
+        </h2>
+        <p class="text-sm text-zinc-400 mb-4">
+          Content follows the Diátaxis framework, organized by the kind of help it offers.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {
+            FORMATS.map((format) => (
+              <Card size="sm" className="h-full">
+                <CardHeader>
+                  <CardTitle>{FORMAT_META[format].label}</CardTitle>
+                  <CardDescription>{FORMAT_META[format].description}</CardDescription>
+                </CardHeader>
+              </Card>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Recently updated + Operational -->
+      <section class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-zinc-200 mb-4">
+            Recently updated
+          </h2>
+          {recentEntries.length > 0 ? (
+            <ul class="space-y-3">
+              {recentEntries.map((entry) => {
+                const date = entry.data.updatedDate ?? entry.data.pubDate;
+                return (
+                  <li>
+                    <a href={`/${entry.domain}/${entry.format}/${entry.slug}`} class="group block no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500">
+                      <Card size="sm" className="transition-colors group-hover:ring-orange-500">
+                        <CardHeader>
+                          <div class="flex items-center gap-3">
+                            <time
+                              datetime={date.toISOString()}
+                              class="text-sm text-muted-foreground tabular-nums"
+                            >
+                              {date.toLocaleDateString("en-US", {
+                                year: "numeric",
+                                month: "short",
+                                day: "numeric",
+                              })}
+                            </time>
+                            <Badge variant="outline">{DOMAIN_META[entry.domain].label}</Badge>
+                          </div>
+                          <CardTitle className="group-hover:text-orange-500 transition-colors">
+                            {entry.data.title}
+                          </CardTitle>
+                        </CardHeader>
+                      </Card>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          ) : (
+            <p class="text-sm text-zinc-500 italic">No articles yet.</p>
+          )}
+        </div>
+
+        <div>
+          <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-zinc-200 mb-4">
+            Operational
+          </h2>
+          <div class="space-y-4">
+            <a href="/incidents" class="group block no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500">
+              <Card className="transition-colors group-hover:ring-orange-500">
+                <CardHeader>
+                  <CardTitle className="text-lg group-hover:text-orange-500 transition-colors">
+                    Incidents
+                  </CardTitle>
+                  <CardDescription>Post-mortems, root cause analysis, and action items from production incidents.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <span class="text-xs text-muted-foreground">{incidents.length} {incidents.length === 1 ? "incident" : "incidents"}</span>
+                </CardContent>
+              </Card>
+            </a>
+            <a href="/decisions" class="group block no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500">
+              <Card className="transition-colors group-hover:ring-orange-500">
+                <CardHeader>
+                  <CardTitle className="text-lg group-hover:text-orange-500 transition-colors">
+                    Decisions
+                  </CardTitle>
+                  <CardDescription>Architecture Decision Records capturing why choices were made and their consequences.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <span class="text-xs text-muted-foreground">{decisions.length} {decisions.length === 1 ? "decision" : "decisions"}</span>
+                </CardContent>
+              </Card>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </GridLayout>
 </BaseLayout>
