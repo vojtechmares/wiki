@@ -28,7 +28,6 @@ function mdNote(site: URL): string {
   return [
     "Note: Append `.md` to any documentation page URL to get its raw Markdown",
     `(e.g. ${example}). Do not append \`.md\` to asset URLs such as images (\`.png\`).`,
-    "This is a planned feature and may not be available yet.",
   ].join("\n");
 }
 

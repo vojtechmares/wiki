@@ -14,7 +14,9 @@ export default defineConfig({
     react(),
     sitemap({
       filter: (page) =>
-        !page.endsWith("/llms.txt") && !page.endsWith("/llms-full.txt"),
+        !page.endsWith("/llms.txt") &&
+        !page.endsWith("/llms-full.txt") &&
+        !page.endsWith(".md"),
     }),
     llmsTxt(),
   ],

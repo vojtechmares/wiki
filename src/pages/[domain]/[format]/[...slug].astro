@@ -38,6 +38,7 @@ const jsonLd = articleJsonLd({
   description={entry.data.description}
   ogImage={ogImage}
   jsonLd={jsonLd}
+  mdHref={`${Astro.url.pathname}.md`}
 >
   <Navigation />
 

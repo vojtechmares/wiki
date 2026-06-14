@@ -8,9 +8,10 @@ interface Props {
   description: string;
   ogImage?: string;
   jsonLd?: string;
+  mdHref?: string;
 }
 
-const {title, description, ogImage, jsonLd} = Astro.props;
+const {title, description, ogImage, jsonLd, mdHref} = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const siteName = "DevOps Wiki";
 const fullTitle = `${title} | ${siteName}`;
@@ -31,6 +32,14 @@ const fullTitle = `${title} | ${siteName}`;
       href={new URL("/llms.txt", Astro.site).href}
       title="llms.txt"
     />
+    {mdHref && (
+      <link
+        rel="alternate"
+        type="text/markdown"
+        href={new URL(mdHref, Astro.site).href}
+        title="Markdown"
+      />
+    )}
 
     <!-- Open Graph -->
     <meta property="og:type" content="article" />
