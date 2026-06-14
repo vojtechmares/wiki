@@ -6,6 +6,7 @@ export const DOMAINS = [
   "reliability",
   "security",
   "platform",
+  "agents",
 ] as const;
 
 export type Domain = (typeof DOMAINS)[number];
@@ -36,6 +37,11 @@ export const DOMAIN_META: Record<
   platform: {
     label: "Platform",
     description: "Kubernetes, operators, and platform engineering",
+  },
+  agents: {
+    label: "Agents",
+    description:
+      "AI agents, agentic workflows, LLM orchestration, and autonomous automation",
   },
 };
 

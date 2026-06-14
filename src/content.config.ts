@@ -36,6 +36,11 @@ const platform = defineCollection({
   schema: baseSchema,
 });
 
+const agents = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./content/agents" }),
+  schema: baseSchema,
+});
+
 const incidentSchema = baseSchema.extend({
   severity: z.enum(["critical", "major", "minor"]).optional(),
 });
@@ -63,6 +68,7 @@ export const collections = {
   reliability,
   security,
   platform,
+  agents,
   incidents,
   decisions,
 };
