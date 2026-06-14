@@ -96,12 +96,10 @@ const recentEntries = (await getAllEntries())
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {
             FORMATS.map((format) => (
-              <Card size="sm" className="h-full">
-                <CardHeader>
-                  <CardTitle>{FORMAT_META[format].label}</CardTitle>
-                  <CardDescription>{FORMAT_META[format].description}</CardDescription>
-                </CardHeader>
-              </Card>
+              <div>
+                <h3 class="font-medium text-zinc-200 mb-1">{FORMAT_META[format].label}</h3>
+                <p class="text-sm text-muted-foreground">{FORMAT_META[format].description}</p>
+              </div>
             ))
           }
         </div>
