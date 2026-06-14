@@ -1,0 +1,41 @@
+allowBuilds:
+  esbuild: true
+  msw: true
+  sharp: true
+
+# Project-local exemption from the global minimumReleaseAge (15-day) guard.
+# We deliberately track the Astro 7 beta toolchain here, whose releases are
+# newer than the global cutoff. The guard stays active for every other package
+# (anything fresh outside this list still fails the supply-chain check).
+minimumReleaseAgeExclude:
+  # Astro 7 beta + its freshly published build/runtime toolchain
+  - astro
+  - "@astrojs/*"
+  - rollup
+  - "@rollup/*"
+  - vite
+  - "@clack/*"
+  - shiki
+  - "@shikijs/*"
+  - obug
+  - property-information
+  - js-yaml
+  - tar
+  - tinyclip
+  - tinyexec
+  - tinyglobby
+  # Vercel adapter
+  - "@vercel/*"
+  # browserslist data packages (republished almost daily)
+  - baseline-browser-mapping
+  - electron-to-chromium
+  - node-releases
+
+# Project-local exemption from the global trustPolicy: no-downgrade guard.
+# The Astro 7 beta tree introduces these older, lower-provenance pinned versions,
+# which the policy flags as a trust downgrade. Both are canonical packages from
+# their real maintainers (semver = npm CLI team; reselect = Redux core team) and
+# were manually verified safe. The policy stays active for every other package.
+trustPolicyExclude:
+  - semver
+  - reselect
