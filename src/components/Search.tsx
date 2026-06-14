@@ -154,7 +154,7 @@ export default function Search() {
               if (query.trim()) search(query);
             }}
             onKeyDown={handleKeyDown}
-            placeholder="Search\u2026"
+            placeholder={"Search\u2026"}
             className="h-auto w-full md:w-48 md:focus:w-64 transition-[width,border-color,box-shadow] duration-200 bg-zinc-800 border border-zinc-700 text-zinc-100 text-sm pl-8 pr-12 py-1.5 placeholder-zinc-500 focus:outline-none focus-visible:border-orange-500 focus-visible:ring-[2px] focus-visible:ring-orange-500/30"
           />
           <kbd className="hidden md:inline-flex absolute right-2 top-1/2 -translate-y-1/2 items-center gap-0.5 px-1.5 py-0.5 text-[10px] text-zinc-500 bg-zinc-700/50 border border-zinc-600 rounded">
