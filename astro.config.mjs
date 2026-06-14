@@ -3,13 +3,21 @@ import react from "@astrojs/react";
 import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import vercel from "@astrojs/vercel";
+import llmsTxt from "./src/integrations/llms-txt/index.ts";
 
 export default defineConfig({
   site: "https://wiki.mares.cz",
   output: "static",
   trailingSlash: "never",
   adapter: vercel(),
-  integrations: [react(), sitemap()],
+  integrations: [
+    react(),
+    sitemap({
+      filter: (page) =>
+        !page.endsWith("/llms.txt") && !page.endsWith("/llms-full.txt"),
+    }),
+    llmsTxt(),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

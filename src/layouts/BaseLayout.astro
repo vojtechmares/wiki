@@ -25,6 +25,12 @@ const fullTitle = `${title} | ${siteName}`;
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL.href} />
+    <link
+      rel="alternate"
+      type="text/plain"
+      href={new URL("/llms.txt", Astro.site).href}
+      title="llms.txt"
+    />
 
     <!-- Open Graph -->
     <meta property="og:type" content="article" />
