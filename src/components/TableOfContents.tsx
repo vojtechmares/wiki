@@ -40,7 +40,7 @@ export default function TableOfContents({headings}: Props) {
   return (
     <nav className="hidden xl:block xl:col-span-3">
       <div className="sticky top-[3.75rem] h-[calc(100vh-3.75rem)] overflow-y-auto py-6 pl-4">
-        <h2 className="font-semibold text-sm text-zinc-400 uppercase tracking-wider mb-3">
+        <h2 className="font-semibold text-sm text-neutral-400 uppercase tracking-wider mb-3">
           On this page
         </h2>
         <ul className="space-y-1">
@@ -53,7 +53,7 @@ export default function TableOfContents({headings}: Props) {
                 } ${
                   activeId === heading.slug
                     ? "text-orange-500"
-                    : "text-zinc-400 hover:text-zinc-200"
+                    : "text-neutral-400 hover:text-neutral-200"
                 }`}
                 style={{paddingTop: "0.25rem", paddingBottom: "0.25rem"}}
               >

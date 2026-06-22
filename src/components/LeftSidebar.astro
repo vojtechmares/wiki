@@ -29,7 +29,7 @@ const entriesByFormat = FORMATS.map((format) => ({
     {
       entriesByFormat.map(({format, entries}) => (
         <div class="mb-5">
-          <h2 class="font-[family-name:var(--font-heading)] font-semibold text-xs text-zinc-400 uppercase tracking-wider mb-2">
+          <h2 class="font-[family-name:var(--font-heading)] font-semibold text-xs text-neutral-400 uppercase tracking-wider mb-2">
             {FORMAT_META[format].label}
           </h2>
           <ul class="space-y-0.5">
@@ -41,10 +41,10 @@ const entriesByFormat = FORMATS.map((format) => ({
                   <a
                     href={`/${domain}/${entry.format}/${entry.slug}`}
                     class:list={[
-                      "block px-3 py-1.5 text-sm no-underline transition-colors focus-visible:text-orange-500 focus-visible:bg-zinc-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/50",
+                      "block px-3 py-1.5 text-sm no-underline transition-colors focus-visible:text-orange-500 focus-visible:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500/50",
                       isActive
-                        ? "text-orange-500 bg-zinc-800 border-l-2 border-orange-500"
-                        : "text-zinc-300 hover:text-zinc-100 hover:bg-zinc-800 border-l-2 border-transparent",
+                        ? "text-orange-500 bg-neutral-800 border-l-2 border-orange-500"
+                        : "text-neutral-300 hover:text-neutral-100 hover:bg-neutral-800 border-l-2 border-transparent",
                     ]}
                   >
                     {entry.data.title}

@@ -20,7 +20,7 @@ export function NavLink({
       size="sm"
       className={cn(
         "no-underline",
-        isActive ? "text-orange-500 bg-zinc-800" : "text-zinc-300",
+        isActive ? "text-orange-500 bg-neutral-800" : "text-neutral-300",
         className,
       )}
     >

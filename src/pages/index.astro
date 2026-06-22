@@ -51,17 +51,17 @@ const recentEntries = (await getAllEntries())
     <main id="main-content" class="lg:col-span-12 space-y-12">
       <!-- Hero -->
       <section>
-        <h1 class="font-[family-name:var(--font-heading)] text-4xl sm:text-5xl font-bold text-zinc-100 mb-4 text-balance">
+        <h1 class="font-[family-name:var(--font-heading)] text-4xl sm:text-5xl font-bold text-neutral-100 mb-4 text-balance">
           DevOps Wiki
         </h1>
-        <p class="text-lg text-zinc-300 max-w-2xl">
+        <p class="text-lg text-neutral-300 max-w-2xl">
           A knowledge base for DevOps and Platform engineers. Find tutorials, practical guides, deep explanations, and quick reference material.
         </p>
       </section>
 
       <!-- Browse by domain -->
       <section>
-        <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-zinc-200 mb-4">
+        <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-neutral-200 mb-4">
           Browse by domain
         </h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -87,17 +87,17 @@ const recentEntries = (await getAllEntries())
 
       <!-- Browse by type (Diátaxis) -->
       <section>
-        <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-zinc-200 mb-1">
+        <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-neutral-200 mb-1">
           Browse by type
         </h2>
-        <p class="text-sm text-zinc-400 mb-4">
+        <p class="text-sm text-neutral-400 mb-4">
           Content follows the Diátaxis framework, organized by the kind of help it offers.
         </p>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {
             FORMATS.map((format) => (
               <div>
-                <h3 class="font-medium text-zinc-200 mb-1">{FORMAT_META[format].label}</h3>
+                <h3 class="font-medium text-neutral-200 mb-1">{FORMAT_META[format].label}</h3>
                 <p class="text-sm text-muted-foreground">{FORMAT_META[format].description}</p>
               </div>
             ))
@@ -108,7 +108,7 @@ const recentEntries = (await getAllEntries())
       <!-- Recently updated + Operational -->
       <section class="grid grid-cols-1 lg:grid-cols-2 gap-12">
         <div>
-          <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-zinc-200 mb-4">
+          <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-neutral-200 mb-4">
             Recently updated
           </h2>
           {recentEntries.length > 0 ? (
@@ -144,12 +144,12 @@ const recentEntries = (await getAllEntries())
               })}
             </ul>
           ) : (
-            <p class="text-sm text-zinc-500 italic">No articles yet.</p>
+            <p class="text-sm text-neutral-500 italic">No articles yet.</p>
           )}
         </div>
 
         <div>
-          <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-zinc-200 mb-4">
+          <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-neutral-200 mb-4">
             Operational
           </h2>
           <div class="space-y-4">

@@ -40,18 +40,18 @@ const jsonLd = articleJsonLd({
 
   <GridLayout class="py-8">
     <main id="main-content" class="min-w-0 lg:col-start-4 lg:col-span-6">
-      <article class="prose prose-invert prose-zinc max-w-none">
+      <article class="prose prose-invert prose-neutral max-w-none">
         <header class="not-prose mb-8">
           <PageBreadcrumb items={[
             { label: "Home", href: "/" },
             { label: "Incidents", href: "/incidents" },
             { label: entry.data.title },
           ]} />
-          <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-3 mt-3 text-balance">
+          <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-neutral-100 mb-3 mt-3 text-balance">
             {entry.data.title}
           </h1>
-          <p class="text-zinc-400 mb-4">{entry.data.description}</p>
-          <div class="flex items-center gap-3 text-sm text-zinc-500">
+          <p class="text-neutral-400 mb-4">{entry.data.description}</p>
+          <div class="flex items-center gap-3 text-sm text-neutral-500">
             <time datetime={entry.data.pubDate.toISOString()}>
               {entry.data.pubDate.toLocaleDateString("en-US", {
                 year: "numeric",

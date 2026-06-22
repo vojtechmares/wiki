@@ -24,10 +24,10 @@ const decisions = await getDecisions();
         { label: "Home", href: "/" },
         { label: "Decisions" },
       ]} />
-      <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-2 mt-3 text-balance">
+      <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-neutral-100 mb-2 mt-3 text-balance">
         Decisions
       </h1>
-      <p class="text-zinc-400">
+      <p class="text-neutral-400">
         Architecture Decision Records. Point-in-time records capturing why choices were made, the options considered, and their consequences.
       </p>
     </div>
@@ -74,7 +74,7 @@ const decisions = await getDecisions();
         ))}
       </ul>
     ) : (
-      <p class="text-sm text-zinc-500 italic">No decisions recorded yet.</p>
+      <p class="text-sm text-neutral-500 italic">No decisions recorded yet.</p>
     )}
     </main>
   </GridLayout>

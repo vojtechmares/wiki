@@ -126,7 +126,7 @@ export default function Search() {
         <div className="relative">
           <svg
             aria-hidden="true"
-            className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-zinc-400 pointer-events-none"
+            className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-neutral-400 pointer-events-none"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -155,16 +155,16 @@ export default function Search() {
             }}
             onKeyDown={handleKeyDown}
             placeholder={"Search\u2026"}
-            className="h-auto w-full md:w-48 md:focus:w-64 transition-[width,border-color,box-shadow] duration-200 bg-zinc-800 border border-zinc-700 text-zinc-100 text-sm pl-8 pr-12 py-1.5 placeholder-zinc-500 focus:outline-none focus-visible:border-orange-500 focus-visible:ring-[2px] focus-visible:ring-orange-500/30"
+            className="h-auto w-full md:w-48 md:focus:w-64 transition-[width,border-color,box-shadow] duration-200 bg-neutral-800 border border-neutral-700 text-neutral-100 text-sm pl-8 pr-12 py-1.5 placeholder-neutral-500 focus:outline-none focus-visible:border-orange-500 focus-visible:ring-[2px] focus-visible:ring-orange-500/30"
           />
-          <kbd className="hidden md:inline-flex absolute right-2 top-1/2 -translate-y-1/2 items-center gap-0.5 px-1.5 py-0.5 text-[10px] text-zinc-500 bg-zinc-700/50 border border-zinc-600 rounded">
+          <kbd className="hidden md:inline-flex absolute right-2 top-1/2 -translate-y-1/2 items-center gap-0.5 px-1.5 py-0.5 text-[10px] text-neutral-500 bg-neutral-700/50 border border-neutral-600 rounded">
             ⌘K
           </kbd>
         </div>
       </Field>
 
       {isOpen && results.length > 0 && (
-        <ul id="search-results" role="listbox" aria-label="Search results" className="absolute top-full left-0 right-0 md:w-96 mt-1 bg-zinc-800 border border-zinc-700 shadow-lg max-h-96 overflow-y-auto z-50">
+        <ul id="search-results" role="listbox" aria-label="Search results" className="absolute top-full left-0 right-0 md:w-96 mt-1 bg-neutral-800 border border-neutral-700 shadow-lg max-h-96 overflow-y-auto z-50">
           {results.map((item, i) => (
             <li key={item.url} id={`search-result-${i}`} role="option" aria-selected={i === selectedIndex}>
               <a
@@ -175,18 +175,18 @@ export default function Search() {
                 }}
                 onMouseEnter={() => setSelectedIndex(i)}
                 className={`block px-3 py-2 no-underline transition-colors ${
-                  i === selectedIndex ? "bg-zinc-700" : ""
+                  i === selectedIndex ? "bg-neutral-700" : ""
                 }`}
               >
                 <div className="flex items-center gap-2 min-w-0">
-                  <span className="text-sm text-zinc-100 truncate">
+                  <span className="text-sm text-neutral-100 truncate">
                     {item.title}
                   </span>
-                  <span className="shrink-0 text-[10px] px-1.5 py-0.5 bg-zinc-900 text-zinc-400 border border-zinc-700">
+                  <span className="shrink-0 text-[10px] px-1.5 py-0.5 bg-neutral-900 text-neutral-400 border border-neutral-700">
                     {item.collection}
                   </span>
                 </div>
-                <p className="text-xs text-zinc-400 truncate mt-0.5">
+                <p className="text-xs text-neutral-400 truncate mt-0.5">
                   {item.description}
                 </p>
               </a>
@@ -196,7 +196,7 @@ export default function Search() {
       )}
 
       {isOpen && query.trim() && results.length === 0 && (
-        <div aria-live="polite" className="absolute top-full left-0 right-0 md:w-96 mt-1 bg-zinc-800 border border-zinc-700 shadow-lg z-50 px-3 py-4 text-sm text-zinc-400 text-center">
+        <div aria-live="polite" className="absolute top-full left-0 right-0 md:w-96 mt-1 bg-neutral-800 border border-neutral-700 shadow-lg z-50 px-3 py-4 text-sm text-neutral-400 text-center">
           No results for &ldquo;{query}&rdquo;
         </div>
       )}

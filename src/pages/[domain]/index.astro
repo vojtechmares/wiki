@@ -41,23 +41,23 @@ const entriesByFormat = FORMATS.map((format) => ({
         { label: "Home", href: "/" },
         { label: meta.label },
       ]} />
-      <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-zinc-100 mb-2 mt-3 text-balance">
+      <h1 class="font-[family-name:var(--font-heading)] text-3xl sm:text-4xl font-bold text-neutral-100 mb-2 mt-3 text-balance">
         {meta.label}
       </h1>
-      <p class="text-zinc-400">{meta.description}</p>
+      <p class="text-neutral-400">{meta.description}</p>
     </div>
 
     {
       entriesByFormat.map(({ format, label, description, entries }) => (
         <section class="mb-10">
           <div class="flex items-baseline justify-between mb-4">
-            <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-zinc-200">
+            <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-neutral-200">
               {label}
             </h2>
             {entries.length > 0 && (
               <a
                 href={`/${domain}/${format}`}
-                class="text-sm text-zinc-400 hover:text-orange-500 no-underline transition-colors"
+                class="text-sm text-neutral-400 hover:text-orange-500 no-underline transition-colors"
               >
                 View all
               </a>
@@ -81,7 +81,7 @@ const entriesByFormat = FORMATS.map((format) => ({
               ))}
             </ul>
           ) : (
-            <p class="text-sm text-zinc-500 italic">{description} &mdash; coming soon.</p>
+            <p class="text-sm text-neutral-500 italic">{description} &mdash; coming soon.</p>
           )}
         </section>
       ))
@@ -90,12 +90,12 @@ const entriesByFormat = FORMATS.map((format) => ({
     {relatedDecisions.length > 0 && (
       <section class="mb-10">
         <div class="flex items-baseline justify-between mb-4">
-          <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-zinc-200">
+          <h2 class="font-[family-name:var(--font-heading)] text-xl font-semibold text-neutral-200">
             Related Decisions
           </h2>
           <a
             href={`/${domain}/decisions`}
-            class="text-sm text-zinc-400 hover:text-orange-500 no-underline transition-colors"
+            class="text-sm text-neutral-400 hover:text-orange-500 no-underline transition-colors"
           >
             View all
           </a>
