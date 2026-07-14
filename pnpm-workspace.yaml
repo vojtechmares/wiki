@@ -9,7 +9,8 @@ allowBuilds:
 # We track Astro 7 closely, and its releases (plus those of its build/runtime
 # toolchain) are usually newer than the global cutoff. The guard stays active
 # for every other package (anything fresh outside this list still fails the
-# supply-chain check) - wrangler included, hence its exact pin in package.json.
+# supply-chain check), wrangler included - which is why it resolves to the
+# newest release that has cleared the cutoff rather than the newest one.
 minimumReleaseAgeExclude:
   # Astro 7 + its freshly published build/runtime toolchain
   - astro

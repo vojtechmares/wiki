@@ -1,17 +1,21 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "wiki",
-  // Newest date the workerd bundled with the pinned wrangler supports; bump
-  // together with wrangler.
+  // Must be a date the pinned workerd build actually supports, not simply today's
+  // date, or `wrangler dev` refuses to boot. Bump alongside wrangler upgrades.
   "compatibility_date": "2026-07-02",
-  // Assets-only Worker: the site is fully prerendered, so there is no Worker
-  // script to run. Cloudflare serves ./dist straight from the edge.
   "assets": {
     "directory": "./dist",
-    // Astro is configured with trailingSlash: "never".
+    // Astro is configured with `trailingSlash: "never"` and builds directory-style
+    // output (platform/tutorials/<slug>/index.html), so serve those at
+    // /platform/tutorials/<slug> and redirect the trailing-slash variant away
+    // (Cloudflare issues a 307 here). Keeps one canonical URL per page.
     "html_handling": "drop-trailing-slash",
+    // Serve the built 404.astro page, with a 404 status, for unmatched paths.
     "not_found_handling": "404-page"
   },
+  // No "main" and no "binding": this Worker is assets-only. Every route is
+  // prerendered at build time, so there is no Worker script to invoke.
   "observability": {
     "enabled": true
   }

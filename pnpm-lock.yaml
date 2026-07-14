@@ -76,7 +76,7 @@ importers:
         specifier: ^19.2.3
         version: 19.2.3(@types/react@19.2.17)
       wrangler:
-        specifier: 4.105.0
+        specifier: ^4.105.0
         version: 4.105.0
 
 packages:
