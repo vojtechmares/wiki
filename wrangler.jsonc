@@ -1,0 +1,18 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "wiki",
+  // Newest date the workerd bundled with the pinned wrangler supports; bump
+  // together with wrangler.
+  "compatibility_date": "2026-07-02",
+  // Assets-only Worker: the site is fully prerendered, so there is no Worker
+  // script to run. Cloudflare serves ./dist straight from the edge.
+  "assets": {
+    "directory": "./dist",
+    // Astro is configured with trailingSlash: "never".
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

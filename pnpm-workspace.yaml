@@ -2,13 +2,16 @@ allowBuilds:
   esbuild: true
   msw: true
   sharp: true
+  # Workers runtime behind `wrangler dev`; its postinstall fetches the binary.
+  workerd: true
 
 # Project-local exemption from the global minimumReleaseAge (15-day) guard.
-# We deliberately track the Astro 7 beta toolchain here, whose releases are
-# newer than the global cutoff. The guard stays active for every other package
-# (anything fresh outside this list still fails the supply-chain check).
+# We track Astro 7 closely, and its releases (plus those of its build/runtime
+# toolchain) are usually newer than the global cutoff. The guard stays active
+# for every other package (anything fresh outside this list still fails the
+# supply-chain check) - wrangler included, hence its exact pin in package.json.
 minimumReleaseAgeExclude:
-  # Astro 7 beta + its freshly published build/runtime toolchain
+  # Astro 7 + its freshly published build/runtime toolchain
   - astro
   - "@astrojs/*"
   - rollup
@@ -24,15 +27,17 @@ minimumReleaseAgeExclude:
   - tinyclip
   - tinyexec
   - tinyglobby
-  # Vercel adapter
-  - "@vercel/*"
+  # Astro integration that Renovate merged before the guard cleared it; see the
+  # minimumReleaseAge in renovate.json, which is kept above the global cutoff so
+  # this stays a one-off rather than a recurring block.
+  - astro-og-canvas
   # browserslist data packages (republished almost daily)
   - baseline-browser-mapping
   - electron-to-chromium
   - node-releases
 
 # Project-local exemption from the global trustPolicy: no-downgrade guard.
-# The Astro 7 beta tree introduces these older, lower-provenance pinned versions,
+# The Astro 7 tree pulls in these older, lower-provenance pinned versions,
 # which the policy flags as a trust downgrade. Both are canonical packages from
 # their real maintainers (semver = npm CLI team; reselect = Redux core team) and
 # were manually verified safe. The policy stays active for every other package.

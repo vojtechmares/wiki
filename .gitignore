@@ -1,9 +1,8 @@
 node_modules/
 dist/
 .astro/
-.vercel/
+.wrangler/
 .DS_Store
 .claude/settings.local.json
 .playwright-cli/
 .playwright/
-.vercel

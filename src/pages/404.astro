@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Navigation from "../components/Navigation.astro";
+import GridLayout from "../components/GridLayout.astro";
+---
+
+<BaseLayout
+  title="Page not found"
+  description="The page you are looking for does not exist."
+>
+  <Navigation />
+
+  <GridLayout class="py-8">
+    <main id="main-content" class="lg:col-span-12 space-y-6">
+      <section>
+        <p class="font-[family-name:var(--font-mono)] text-sm text-orange-500 mb-2">
+          404
+        </p>
+        <h1 class="font-[family-name:var(--font-heading)] text-4xl sm:text-5xl font-bold text-neutral-100 mb-4 text-balance">
+          Page not found
+        </h1>
+        <p class="text-lg text-neutral-300 max-w-2xl">
+          The page you are looking for does not exist or has been moved.
+        </p>
+      </section>
+
+      <a
+        href="/"
+        class="inline-block text-orange-500 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500"
+      >
+        Back to the home page
+      </a>
+    </main>
+  </GridLayout>
+</BaseLayout>
