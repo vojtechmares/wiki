@@ -16,6 +16,10 @@
   },
   // No "main" and no "binding": this Worker is assets-only. Every route is
   // prerendered at build time, so there is no Worker script to invoke.
+  //
+  // The site is only meant to be reachable at wiki.mares.cz. Leaving workers.dev
+  // enabled would publish a second, fully crawlable copy of every page.
+  "workers_dev": false,
   "observability": {
     "enabled": true
   }
