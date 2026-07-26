@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "wiki",
+  "name": "wiki-production",
   // Must be a date the pinned workerd build actually supports, not simply today's
   // date, or `wrangler dev` refuses to boot. Bump alongside wrangler upgrades.
   "compatibility_date": "2026-07-02",
