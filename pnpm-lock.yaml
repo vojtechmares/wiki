@@ -36,11 +36,11 @@ importers:
         specifier: ^4.3.0
         version: 4.3.3(vite@8.0.16(@types/node@25.9.3)(esbuild@0.28.1)(jiti@2.7.0))
       astro:
-        specifier: 7.2.6
-        version: 7.2.6(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@25.9.3)(@vercel/functions@3.6.2)(jiti@2.7.0)
+        specifier: 7.2.7
+        version: 7.2.7(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@25.9.3)(@vercel/functions@3.6.2)(jiti@2.7.0)
       astro-og-canvas:
         specifier: ^0.13.0
-        version: 0.13.0(astro@7.2.6(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@25.9.3)(@vercel/functions@3.6.2)(jiti@2.7.0))
+        version: 0.13.0(astro@7.2.7(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@25.9.3)(@vercel/functions@3.6.2)(jiti@2.7.0))
       canvaskit-wasm:
         specifier: ^0.42.0
         version: 0.42.0
@@ -1298,8 +1298,8 @@ packages:
     peerDependencies:
       astro: ^5.0.0 || ^6.0.0 || ^7.0.0
 
-  astro@7.2.6:
-    resolution: {integrity: sha512-qzT4tAhgHYX/6/MUGslAkF0PVkM4WNsMw2A1GrbfA9cXp68hmdqF3f7MuF5rRFvwQbjowqjOf90ao9whfgV5mw==}
+  astro@7.2.7:
+    resolution: {integrity: sha512-+XW7Z1x03hq/zV8tiEnvS8E7JYKo5iyYVPJFt5RhEj3dOE+zSwhVaUabcqNsEDVJcneQX2mqxo4fPgoSO+Jc2w==}
     engines: {node: '>=22.12.0', npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
     peerDependencies:
@@ -4256,14 +4256,14 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
-  astro-og-canvas@0.13.0(astro@7.2.6(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@25.9.3)(@vercel/functions@3.6.2)(jiti@2.7.0)):
+  astro-og-canvas@0.13.0(astro@7.2.7(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@25.9.3)(@vercel/functions@3.6.2)(jiti@2.7.0)):
     dependencies:
-      astro: 7.2.6(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@25.9.3)(@vercel/functions@3.6.2)(jiti@2.7.0)
+      astro: 7.2.7(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@25.9.3)(@vercel/functions@3.6.2)(jiti@2.7.0)
       canvaskit-wasm: 0.41.1
       deterministic-object-hash: 2.0.2
       entities: 8.0.0
 
-  astro@7.2.6(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@25.9.3)(@vercel/functions@3.6.2)(jiti@2.7.0):
+  astro@7.2.7(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@25.9.3)(@vercel/functions@3.6.2)(jiti@2.7.0):
     dependencies:
       '@astrojs/compiler-rs': 0.4.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)
       '@astrojs/internal-helpers': 0.10.4
